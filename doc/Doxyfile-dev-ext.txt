@@ -1,0 +1,6 @@
+Title           = SeaBreeze Developer Documentation
+Company         = Ocean Optics, Inc.
+Author          = Ocean Optics, Inc
+DocumentType    = SeaBreeze Developer Documentation
+Subject         = SeaBreeze Developer Documentation
+Keywords        = SeaBreeze Developer Documentation

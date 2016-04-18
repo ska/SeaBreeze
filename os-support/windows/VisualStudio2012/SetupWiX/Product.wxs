@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <!-- New to WiX?  Recommend reading http://stackoverflow.com/questions/471424/wix-tricks-and-tips/577793#577793 -->
+
+  <Product 
+    Id="F6857325-8FAB-49A1-987A-E045706DE551" 
+    Name="SeaBreeze" 
+    Language="1033" 
+    Version="2.2.2.0" 
+    Manufacturer="Ocean Optics, Inc" 
+    UpgradeCode="bc0ab2fd-253c-4075-9401-9ff2cde812cc">
+
+    <!-- Packages should each generate their own GUID, no need to track -->
+    <Package 
+      Id='*' 
+      Keywords='Installer' 
+      Description="SeaBreeze Installer"
+      Comments='SeaBreeze is a basic Ocean Optics spectrometer driver suitable for embedded platforms' 
+      Manufacturer='Ocean Optics, Inc.'
+      InstallerVersion='200' 
+      InstallScope="perMachine" 
+      Languages='1033' 
+      Compressed='yes' 
+      SummaryCodepage='1252' />
+
+    <?define SeaBreezeHome = $(var.SolutionDir)\..\..\.. ?>
+    <?define DriverDir = $(var.SolutionDir)\..\FilesToInstall\windows-support ?>
+
+    <!-- x86 / x64 pixie dust -->
+    <?if $(var.Platform) = x64 ?>
+      <?define ProductName = "SeaBreeze (64-bit)" ?>
+      <?define Win64 = "yes" ?>
+      <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+      <?define LibOutputDir = $(var.SolutionDir)\x64\Debug ?>
+    <?else ?>
+      <?define ProductName = "SeaBreeze (32-bit)" ?>
+      <?define Win64 = "no" ?>
+      <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+      <?define LibOutputDir = $(var.SolutionDir)\Debug ?>
+    <?endif ?>
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+    <Media Id='1' Cabinet='Sample.cab' EmbedCab='yes' />
+
+		<Feature Id="ProductFeature" Title="SeaBreeze" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="WindowsFolder" Name="Windows">
+        <Directory Id="SYSTEM32_FOLDER" Name="System32" />
+      </Directory>
+			<Directory Id="$(var.PlatformProgramFilesFolder)">
+				<Directory Id="MANUFACTURER_FOLDER" Name="Ocean Optics">
+          <Directory Id="PRODUCT_FOLDER" Name="SeaBreeze">
+            <Directory Id="LIB_FOLDER" Name="Library" />
+            <Directory Id="API_FOLDER" Name="API">
+              <Directory Id="INC_FOLDER" Name="include">
+                <Directory Id="INC_API_FOLDER" Name="api">
+                  <Directory Id="INC_API_SBAPI_FOLDER" Name="seabreezeapi" />
+                </Directory>
+              </Directory>
+            </Directory>
+            <Directory Id="DRIVER_FOLDER" Name="Drivers">
+                <Directory Id="COINSTALLERS_I386_FOLDER" Name="i386" />
+                <Directory Id="COINSTALLERS_AMD64_FOLDER" Name="amd64" />
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+    <ComponentGroup Id="ProductComponents">
+
+      <!-- ============================================================= -->
+      <!-- SeaBreeze Library (DLL)                                       -->
+      <!-- ============================================================= -->
+
+      <!-- don't know if all of these are needed or not -->
+      <Component Id="LibraryComponent" Directory="LIB_FOLDER" Win64="$(var.Win64)">
+        <File Id='Lib_SeaBreezeDLL' Name='SeaBreeze.dll' DiskId='1' Source='$(var.LibOutputDir)\SeaBreeze.dll' KeyPath='yes'/>
+        <File Id='Lib_SeaBreezeEXP' Name='SeaBreeze.exp' DiskId='1' Source='$(var.LibOutputDir)\SeaBreeze.exp' />
+        <File Id='Lib_SeaBreezeILK' Name='SeaBreeze.ilk' DiskId='1' Source='$(var.LibOutputDir)\SeaBreeze.ilk' />
+        <File Id='Lib_SeaBreezeLIB' Name='SeaBreeze.lib' DiskId='1' Source='$(var.LibOutputDir)\SeaBreeze.lib' />
+        <File Id='Lib_SeaBreezePDB' Name='SeaBreeze.pdb' DiskId='1' Source='$(var.LibOutputDir)\SeaBreeze.pdb' />
+      </Component>
+
+      <Component Id="System32Component" Directory="SYSTEM32_FOLDER" Win64="$(var.Win64)">
+        <File Id='System32_SeaBreezeDLL' Name='SeaBreeze.dll' DiskId='1' Source='$(var.LibOutputDir)\SeaBreeze.dll' KeyPath='yes'/>
+        <File Id='System32_SeaBreezeEXP' Name='SeaBreeze.exp' DiskId='1' Source='$(var.LibOutputDir)\SeaBreeze.exp' />
+        <File Id='System32_SeaBreezeLIB' Name='SeaBreeze.lib' DiskId='1' Source='$(var.LibOutputDir)\SeaBreeze.lib' />
+      </Component>
+
+      <!-- ============================================================= -->
+      <!-- Header Files                                                  -->
+      <!-- ============================================================= -->
+
+      <!-- TODO: add seabreezeapi.h and dependencies -->
+      <Component Id='APIComponent' Directory='INC_API_FOLDER' Win64="$(var.Win64)" Guid='C2D0E9D2-5511-48B6-86B8-948EF00905D2'>
+        <File DiskId='1' Id='SeaBreezeWrapperH' Name='SeaBreezeWrapper.h' Source='$(var.SeaBreezeHome)\include\api\SeaBreezeWrapper.h' KeyPath='yes' />
+        <File DiskId='1' Id='DllDeclH'          Name='DllDecl.h'          Source='$(var.SeaBreezeHome)\include\api\DllDecl.h' />
+      </Component>
+
+      <!-- ============================================================= -->
+      <!-- CoInstallers                                                  -->
+      <!-- ============================================================= -->
+
+      <Component Id='CoInstallers_i386' Directory='COINSTALLERS_I386_FOLDER' Win64="$(var.Win64)" Guid='A72EBA96-78A8-4173-8945-97D0A4738198'>
+        <File DiskId="1" Id="i386_dpinst.exe"              Name="dpinst.exe"              Source="$(var.DriverDir)\i386\dpinst.exe"              />
+        <File DiskId="1" Id="i386_WdfCoInstaller01007.dll" Name="WdfCoInstaller01007.dll" Source="$(var.DriverDir)\i386\WdfCoInstaller01007.dll" />
+        <File DiskId="1" Id="i386_WinUSBCoInstaller.dll"   Name="WinUSBCoInstaller.dll"   Source="$(var.DriverDir)\i386\WinUSBCoInstaller.dll"   />
+        <File DiskId="1" Id="i386_WUDFUpdate_01007.dll"    Name="WUDFUpdate_01007.dll"    Source="$(var.DriverDir)\i386\WUDFUpdate_01007.dll"    />
+      </Component>
+
+      <Component Id='CoInstallers_amd64' Directory='COINSTALLERS_AMD64_FOLDER' Win64="$(var.Win64)" Guid='22DBADB8-77AB-4EE2-B290-6FBA4E45A41B'>
+        <File DiskId="1" Id="amd64_dpinst.exe"              Name="dpinst.exe"              Source="$(var.DriverDir)\amd64\dpinst.exe"              />
+        <File DiskId="1" Id="amd64_WdfCoInstaller01007.dll" Name="WdfCoInstaller01007.dll" Source="$(var.DriverDir)\amd64\WdfCoInstaller01007.dll" />
+        <File DiskId="1" Id="amd64_WinUSBCoInstaller.dll"   Name="WinUSBCoInstaller.dll"   Source="$(var.DriverDir)\amd64\WinUSBCoInstaller.dll"   />
+        <File DiskId="1" Id="amd64_WUDFUpdate_01007.dll"    Name="WUDFUpdate_01007.dll"    Source="$(var.DriverDir)\amd64\WUDFUpdate_01007.dll"    />
+      </Component>
+
+      <!-- ============================================================= -->
+      <!-- Drivers and Signed INF                                        -->
+      <!-- ============================================================= -->
+
+      <Component Id='Drivers' Directory='DRIVER_FOLDER' Win64="$(var.Win64)" Guid='91362B0A-8245-429F-A462-3054BBCCCE8C'>
+        <File DiskId="1" Id="OOI_ADC1000USB.inf"     Name="OOI_ADC1000USB.inf"     Source="$(var.DriverDir)\OOI_ADC1000USB.inf" KeyPath="yes" />
+        <File DiskId="1" Id="OOI_Apex.inf"           Name="OOI_Apex.inf"           Source="$(var.DriverDir)\OOI_Apex.inf"            />
+        <File DiskId="1" Id="OOI_Apex_XP.inf"        Name="OOI_Apex_XP.inf"        Source="$(var.DriverDir)\OOI_Apex_XP.inf"         />
+        <File DiskId="1" Id="OOI_HR2000.inf"         Name="OOI_HR2000.inf"         Source="$(var.DriverDir)\OOI_HR2000.inf"          />
+        <File DiskId="1" Id="OOI_HR2000Plus.cat"     Name="OOI_HR2000Plus.cat"     Source="$(var.DriverDir)\OOI_HR2000Plus.cat"      />
+        <File DiskId="1" Id="OOI_HR2000Plus.inf"     Name="OOI_HR2000Plus.inf"     Source="$(var.DriverDir)\OOI_HR2000Plus.inf"      />
+        <File DiskId="1" Id="OOI_HR2000Plus_XP.cat"  Name="OOI_HR2000Plus_XP.cat"  Source="$(var.DriverDir)\OOI_HR2000Plus_XP.cat"   />
+        <File DiskId="1" Id="OOI_HR2000Plus_XP.inf"  Name="OOI_HR2000Plus_XP.inf"  Source="$(var.DriverDir)\OOI_HR2000Plus_XP.inf"   />
+        <File DiskId="1" Id="OOI_HR4000.cat"         Name="OOI_HR4000.cat"         Source="$(var.DriverDir)\OOI_HR4000.cat"          />
+        <File DiskId="1" Id="OOI_HR4000.inf"         Name="OOI_HR4000.inf"         Source="$(var.DriverDir)\OOI_HR4000.inf"          />
+        <File DiskId="1" Id="OOI_HR4000_XP.cat"      Name="OOI_HR4000_XP.cat"      Source="$(var.DriverDir)\OOI_HR4000_XP.cat"       />
+        <File DiskId="1" Id="OOI_HR4000_XP.inf"      Name="OOI_HR4000_XP.inf"      Source="$(var.DriverDir)\OOI_HR4000_XP.inf"       />
+        <File DiskId="1" Id="OOI_Jaz.cat"            Name="OOI_Jaz.cat"            Source="$(var.DriverDir)\OOI_Jaz.cat"             />
+        <File DiskId="1" Id="OOI_Jaz.inf"            Name="OOI_Jaz.inf"            Source="$(var.DriverDir)\OOI_Jaz.inf"             />
+        <File DiskId="1" Id="OOI_Jaz_XP.cat"         Name="OOI_Jaz_XP.cat"         Source="$(var.DriverDir)\OOI_Jaz_XP.cat"          />
+        <File DiskId="1" Id="OOI_Jaz_XP.inf"         Name="OOI_Jaz_XP.inf"         Source="$(var.DriverDir)\OOI_Jaz_XP.inf"          />
+        <File DiskId="1" Id="OOI_Maya2000.inf"       Name="OOI_Maya2000.inf"       Source="$(var.DriverDir)\OOI_Maya2000.inf"        />
+        <File DiskId="1" Id="OOI_Maya2000Pro.cat"    Name="OOI_Maya2000Pro.cat"    Source="$(var.DriverDir)\OOI_Maya2000Pro.cat"     />
+        <File DiskId="1" Id="OOI_Maya2000Pro.inf"    Name="OOI_Maya2000Pro.inf"    Source="$(var.DriverDir)\OOI_Maya2000Pro.inf"     />
+        <File DiskId="1" Id="OOI_Maya2000Pro_XP.cat" Name="OOI_Maya2000Pro_XP.cat" Source="$(var.DriverDir)\OOI_Maya2000Pro_XP.cat"  />
+        <File DiskId="1" Id="OOI_Maya2000Pro_XP.inf" Name="OOI_Maya2000Pro_XP.inf" Source="$(var.DriverDir)\OOI_Maya2000Pro_XP.inf"  />
+        <File DiskId="1" Id="OOI_MMSRaman.inf"       Name="OOI_MMSRaman.inf"       Source="$(var.DriverDir)\OOI_MMSRaman.inf"        />
+        <File DiskId="1" Id="OOI_NIR256.inf"         Name="OOI_NIR256.inf"         Source="$(var.DriverDir)\OOI_NIR256.inf"          />
+        <File DiskId="1" Id="OOI_NIR512.inf"         Name="OOI_NIR512.inf"         Source="$(var.DriverDir)\OOI_NIR512.inf"          />
+        <File DiskId="1" Id="OOI_NIRQuest256.cat"    Name="OOI_NIRQuest256.cat"    Source="$(var.DriverDir)\OOI_NIRQuest256.cat"     />
+        <File DiskId="1" Id="OOI_NIRQuest256.inf"    Name="OOI_NIRQuest256.inf"    Source="$(var.DriverDir)\OOI_NIRQuest256.inf"     />
+        <File DiskId="1" Id="OOI_NIRQuest256_XP.cat" Name="OOI_NIRQuest256_XP.cat" Source="$(var.DriverDir)\OOI_NIRQuest256_XP.cat"  />
+        <File DiskId="1" Id="OOI_NIRQuest256_XP.inf" Name="OOI_NIRQuest256_XP.inf" Source="$(var.DriverDir)\OOI_NIRQuest256_XP.inf"  />
+        <File DiskId="1" Id="OOI_NIRQuest512.cat"    Name="OOI_NIRQuest512.cat"    Source="$(var.DriverDir)\OOI_NIRQuest512.cat"     />
+        <File DiskId="1" Id="OOI_NIRQuest512.inf"    Name="OOI_NIRQuest512.inf"    Source="$(var.DriverDir)\OOI_NIRQuest512.inf"     />
+        <File DiskId="1" Id="OOI_NIRQuest512_XP.cat" Name="OOI_NIRQuest512_XP.cat" Source="$(var.DriverDir)\OOI_NIRQuest512_XP.cat"  />
+        <File DiskId="1" Id="OOI_NIRQuest512_XP.inf" Name="OOI_NIRQuest512_XP.inf" Source="$(var.DriverDir)\OOI_NIRQuest512_XP.inf"  />
+        <File DiskId="1" Id="OOI_QE65000.cat"        Name="OOI_QE65000.cat"        Source="$(var.DriverDir)\OOI_QE65000.cat"         />
+        <File DiskId="1" Id="OOI_QE65000.inf"        Name="OOI_QE65000.inf"        Source="$(var.DriverDir)\OOI_QE65000.inf"         />
+        <File DiskId="1" Id="OOI_QE65000_XP.cat"     Name="OOI_QE65000_XP.cat"     Source="$(var.DriverDir)\OOI_QE65000_XP.cat"      />
+        <File DiskId="1" Id="OOI_QE65000_XP.inf"     Name="OOI_QE65000_XP.inf"     Source="$(var.DriverDir)\OOI_QE65000_XP.inf"      />
+        <File DiskId="1" Id="OOI_SAS.inf"            Name="OOI_SAS.inf"            Source="$(var.DriverDir)\OOI_SAS.inf"             />
+        <File DiskId="1" Id="OOI_STS.cat"            Name="OOI_STS.cat"            Source="$(var.DriverDir)\OOI_STS.cat"             />
+        <File DiskId="1" Id="OOI_STS.inf"            Name="OOI_STS.inf"            Source="$(var.DriverDir)\OOI_STS.inf"             />
+        <File DiskId="1" Id="OOI_STS_XP.cat"         Name="OOI_STS_XP.cat"         Source="$(var.DriverDir)\OOI_STS_XP.cat"          />
+        <File DiskId="1" Id="OOI_STS_XP.inf"         Name="OOI_STS_XP.inf"         Source="$(var.DriverDir)\OOI_STS_XP.inf"          />
+        <File DiskId="1" Id="OOI_Torus.inf"          Name="OOI_Torus.inf"          Source="$(var.DriverDir)\OOI_Torus.inf"           />
+        <File DiskId="1" Id="OOI_Torus.cat"          Name="OOI_Torus.cat"          Source="$(var.DriverDir)\OOI_Torus.cat"           />
+        <File DiskId="1" Id="OOI_Torus_XP.inf"       Name="OOI_Torus_XP.inf"       Source="$(var.DriverDir)\OOI_Torus_XP.inf"        />
+        <File DiskId="1" Id="OOI_Torus_XP.cat"       Name="OOI_Torus_XP.cat"       Source="$(var.DriverDir)\OOI_Torus_XP.cat"        />
+        <File DiskId="1" Id="OOI_USB2000.cat"        Name="OOI_USB2000.cat"        Source="$(var.DriverDir)\OOI_USB2000.cat"         />
+        <File DiskId="1" Id="OOI_USB2000.inf"        Name="OOI_USB2000.inf"        Source="$(var.DriverDir)\OOI_USB2000.inf"         />
+        <File DiskId="1" Id="OOI_USB2000_XP.cat"     Name="OOI_USB2000_XP.cat"     Source="$(var.DriverDir)\OOI_USB2000_XP.cat"      />
+        <File DiskId="1" Id="OOI_USB2000_XP.inf"     Name="OOI_USB2000_XP.inf"     Source="$(var.DriverDir)\OOI_USB2000_XP.inf"      />
+        <File DiskId="1" Id="OOI_USB2000Plus.cat"    Name="OOI_USB2000Plus.cat"    Source="$(var.DriverDir)\OOI_USB2000Plus.cat"     />
+        <File DiskId="1" Id="OOI_USB2000Plus.inf"    Name="OOI_USB2000Plus.inf"    Source="$(var.DriverDir)\OOI_USB2000Plus.inf"     />
+        <File DiskId="1" Id="OOI_USB2000Plus_XP.cat" Name="OOI_USB2000Plus_XP.cat" Source="$(var.DriverDir)\OOI_USB2000Plus_XP.cat"  />
+        <File DiskId="1" Id="OOI_USB2000Plus_XP.inf" Name="OOI_USB2000Plus_XP.inf" Source="$(var.DriverDir)\OOI_USB2000Plus_XP.inf"  />
+        <File DiskId="1" Id="OOI_USB250.cat"         Name="OOI_USB250.cat"         Source="$(var.DriverDir)\OOI_USB250.cat"          />
+        <File DiskId="1" Id="OOI_USB250.inf"         Name="OOI_USB250.inf"         Source="$(var.DriverDir)\OOI_USB250.inf"          />
+        <File DiskId="1" Id="OOI_USB250_XP.cat"      Name="OOI_USB250_XP.cat"      Source="$(var.DriverDir)\OOI_USB250_XP.cat"       />
+        <File DiskId="1" Id="OOI_USB250_XP.inf"      Name="OOI_USB250_XP.inf"      Source="$(var.DriverDir)\OOI_USB250_XP.inf"       />
+        <File DiskId="1" Id="OOI_USB325.cat"         Name="OOI_USB325.cat"         Source="$(var.DriverDir)\OOI_USB325.cat"          />
+        <File DiskId="1" Id="OOI_USB325.inf"         Name="OOI_USB325.inf"         Source="$(var.DriverDir)\OOI_USB325.inf"          />
+        <File DiskId="1" Id="OOI_USB325_XP.cat"      Name="OOI_USB325_XP.cat"      Source="$(var.DriverDir)\OOI_USB325_XP.cat"       />
+        <File DiskId="1" Id="OOI_USB325_XP.inf"      Name="OOI_USB325_XP.inf"      Source="$(var.DriverDir)\OOI_USB325_XP.inf"       />
+        <File DiskId="1" Id="OOI_USB4000.cat"        Name="OOI_USB4000.cat"        Source="$(var.DriverDir)\OOI_USB4000.cat"         />
+        <File DiskId="1" Id="OOI_USB4000.inf"        Name="OOI_USB4000.inf"        Source="$(var.DriverDir)\OOI_USB4000.inf"         />
+        <File DiskId="1" Id="OOI_USB4000_XP.cat"     Name="OOI_USB4000_XP.cat"     Source="$(var.DriverDir)\OOI_USB4000_XP.cat"      />
+        <File DiskId="1" Id="OOI_USB4000_XP.inf"     Name="OOI_USB4000_XP.inf"     Source="$(var.DriverDir)\OOI_USB4000_XP.inf"      />
+        <File DiskId="1" Id="OOI_USB500.cat"         Name="OOI_USB500.cat"         Source="$(var.DriverDir)\OOI_USB500.cat"          />
+        <File DiskId="1" Id="OOI_USB500.inf"         Name="OOI_USB500.inf"         Source="$(var.DriverDir)\OOI_USB500.inf"          />
+        <File DiskId="1" Id="OOI_USB500_XP.cat"      Name="OOI_USB500_XP.cat"      Source="$(var.DriverDir)\OOI_USB500_XP.cat"       />
+        <File DiskId="1" Id="OOI_USB500_XP.inf"      Name="OOI_USB500_XP.inf"      Source="$(var.DriverDir)\OOI_USB500_XP.inf"       />
+        <File DiskId="1" Id="OOI_USB650.cat"         Name="OOI_USB650.cat"         Source="$(var.DriverDir)\OOI_USB650.cat"          />
+        <File DiskId="1" Id="OOI_USB650.inf"         Name="OOI_USB650.inf"         Source="$(var.DriverDir)\OOI_USB650.inf"          />
+        <File DiskId="1" Id="OOI_USB650_XP.cat"      Name="OOI_USB650_XP.cat"      Source="$(var.DriverDir)\OOI_USB650_XP.cat"       />
+        <File DiskId="1" Id="OOI_USB650_XP.inf"      Name="OOI_USB650_XP.inf"      Source="$(var.DriverDir)\OOI_USB650_XP.inf"       />
+        <File DiskId="1" Id="OOI_Ventana.inf"        Name="OOI_Ventana.inf"        Source="$(var.DriverDir)\OOI_Ventana.inf"         />
+        <File DiskId="1" Id="OOI_Ventana_XP.inf"     Name="OOI_Ventana_XP.inf"     Source="$(var.DriverDir)\OOI_Ventana_XP.inf"      />
+      </Component>
+    </ComponentGroup>
+	</Fragment>
+
+</Wix>

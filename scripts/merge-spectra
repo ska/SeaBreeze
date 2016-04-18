@@ -1,0 +1,92 @@
+#!/usr/bin/perl
+################################################################################
+#                                merge-spectra                                 #
+################################################################################
+#                                                                              #
+#  Description:  Given a set of CSV files in which the first two columns are   #
+#                wavelength and intensity, generates a single merged CSV for   #
+#                easy graphing in Excel.                                       #
+#                                                                              #
+#  Author:       Mark Zieg <mark.zieg@oceanoptics.com>                         #
+#                                                                              #
+#  Invocation:   $ scripts/merge-spectra data-*.csv > merged.csv               #
+#                                                                              #
+################################################################################
+
+use strict;
+use warnings;
+
+main();
+
+sub main
+{
+    my $filecount = 0;
+    my %spectra;
+    my @wavelengths;
+    my @filenames;
+
+    ############################################################################
+    # load spectra (could be memory-intensive)
+    ############################################################################
+
+    # iterate over filenames passed as command-line arguments
+    for my $filename (@ARGV)
+    {
+        if (open(INFILE, $filename))
+        {
+            # strip out filename (use as column header in merged output)
+            my ($basename) = ($filename =~ /([^\/\\]+)$/);
+
+            # iterate over every line in the file
+            my @values;
+            while (my $line = <INFILE>)
+            {
+                chomp($line);
+                next unless $line =~ /^[-+0-9]/;    # skip lines that don't start with a digit
+
+                my ($wavelength, $value) = split(/,/, $line);
+                next unless defined($value);        # skip lines without commas
+
+                # for the first file ONLY, store wavelengths
+                if (!$filecount)
+                {
+                    push @wavelengths, $wavelength;
+                }
+
+                # accumalate intensity values
+                push @values, $value;
+            }
+
+            close(INFILE);
+
+            $spectra{$basename} = \@values;
+            push @filenames, $basename;
+            $filecount++;
+        }
+        else
+        {
+            die("Can't open $filename: $!");
+        }
+    }
+
+    ############################################################################
+    # output merged file
+    ############################################################################
+
+    print "wavelength";
+    for my $filename (@filenames)
+    {
+        print ",$filename";
+    }
+    print "\n";
+
+    for (my $i = 0; $i <= $#wavelengths; $i++)
+    {
+        printf("%.2lf", $wavelengths[$i]);
+        for my $filename (@filenames)
+        {
+            printf(",%.5lf", $spectra{$filename}->[$i]);
+        }
+        print "\n";
+    }
+}

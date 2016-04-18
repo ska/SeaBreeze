@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SeaBreeze", "VSProj\SeaBreeze.vcproj", "{1282E9E9-C3DB-4F4F-9560-4E5D0539B457}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup32", "Setup32\Setup32.vdproj", "{701439EE-69D7-4AF1-8335-DAA848E9B7FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1282E9E9-C3DB-4F4F-9560-4E5D0539B457}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1282E9E9-C3DB-4F4F-9560-4E5D0539B457}.Debug|Win32.Build.0 = Debug|Win32
+		{1282E9E9-C3DB-4F4F-9560-4E5D0539B457}.Release|Win32.ActiveCfg = Release|Win32
+		{1282E9E9-C3DB-4F4F-9560-4E5D0539B457}.Release|Win32.Build.0 = Release|Win32
+		{701439EE-69D7-4AF1-8335-DAA848E9B7FE}.Debug|Win32.ActiveCfg = Debug
+		{701439EE-69D7-4AF1-8335-DAA848E9B7FE}.Debug|Win32.Build.0 = Debug
+		{701439EE-69D7-4AF1-8335-DAA848E9B7FE}.Release|Win32.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

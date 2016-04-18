@@ -1,0 +1,115 @@
+; Adapted from the example INF in the Microsoft document "How to Use WinUSB to Communicate with a USB Device"
+
+[Version]
+Signature = "$Windows NT$"
+Class = OceanOpticsUSBDevice
+ClassGUID={BAD36DAB-A3D2-4a0e-8B2E-DA36202187D4}
+Provider = %ProviderName%
+DriverVer=11/13/2009,1.1.0
+;CatalogFile=MyCatFile.cat
+
+; ========== Manufacturer/Models sections ===========
+
+[Manufacturer]
+%ProviderName% = MyDevice_WinUSB,NTx86,NTamd64
+
+[MyDevice_WinUSB.NTx86]
+%USB\MyDevice.DeviceDesc% =OOIUSB_Install, USB\VID_2457&PID_1010
+
+[MyDevice_WinUSB.NTamd64]
+%USB\MyDevice.DeviceDesc% =OOIUSB_Install, USB\VID_2457&PID_1010
+
+
+; =================== Class installation =============
+
+[ClassInstall32]
+AddReg=AddClass_AddReg
+
+[AddClass_AddReg]
+HKR,,,0,%DeviceClassString%
+;HKR,,Icon,,"-20"
+
+; =================== Installation ===================
+
+[OOIUSB_Install]
+Include=winusb.inf
+Needs=WINUSB.NT
+
+[OOIUSB_Install.Services]
+Include=winusb.inf
+AddService=WinUSB,0x00000002,WinUSB_ServiceInstall
+
+[WinUSB_ServiceInstall]
+DisplayName     = %WinUSB_SvcDesc%
+ServiceType     = 1
+StartType       = 3
+ErrorControl    = 1
+ServiceBinary   = %12%\WinUSB.sys
+
+[OOIUSB_Install.Wdf]
+KmdfService=WINUSB, WinUSB_Install
+UmdfServiceOrder=WINUSB
+
+[WinUSB_Install]
+KmdfLibraryVersion=1.7
+
+[OOIUSB_Install.HW]
+AddReg=Dev_AddReg
+
+[Dev_AddReg]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{DBBAD306-1786-4f2e-A8AB-340D45F0653F}"
+
+[OOIUSB_Install.CoInstallers]
+AddReg=CoInstallers_AddReg
+CopyFiles=CoInstallers_CopyFiles
+
+[CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"WinUSBCoInstaller.dll","WUDFUpdate_01007.dll","WdfCoInstaller01007.dll,WdfCoInstaller"
+
+[CoInstallers_CopyFiles]
+WinUSBCoInstaller.dll
+WdfCoInstaller01007.dll
+WUDFUpdate_01007.dll
+
+[DestinationDirs]
+CoInstallers_CopyFiles=11
+
+; ================= Source Media Section =====================
+
+[SourceDisksNames.x86]
+1 = %DISK_NAME%,,,\i386
+
+[SourceDisksNames.amd64]
+2 = %DISK_NAME%,,,\amd64
+
+[SourceDisksFiles.x86]
+WinUSBCoInstaller.dll=1
+WdfCoInstaller01007.dll=1
+WUDFUpdate_01007.dll=1
+
+[SourceDisksFiles.amd64]
+WinUSBCoInstaller.dll=2
+WdfCoInstaller01007.dll=2
+WUDFUpdate_01007.dll=2
+
+; Copy Files section
+;------------------------------------------------------------------------------
+[_CopyFiles_sys]
+winusb.sys
+
+;************************************************* *****************************
+; Destination Directories
+;------------------------------------------------------------------------------
+[DestinationDirs]
+DefaultDestDir = 12 ; %SystemRoot%\system32\drivers
+_CopyFiles_sys = 12
+
+; =================== Strings ===================
+
+[Strings]
+ProviderName="Ocean Optics, Inc."
+DeviceClassString="Ocean Optics USB Devices"
+USB\MyDevice.DeviceDesc="Ocean Optics NIR256 (WinUSB)"
+WinUSB_SvcDesc="Ocean Optics NIR256 (WinUSB)"
+DISK_NAME="My Install Disk"
+

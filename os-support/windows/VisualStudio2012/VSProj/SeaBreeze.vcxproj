@@ -1,0 +1,1128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F6857325-8FAB-49A1-987A-E045706DE551}</ProjectGuid>
+    <RootNamespace>SeaBreeze</RootNamespace>
+    <Keyword>MFCDLLProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <UseOfAtl>false</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <UseOfAtl>false</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\WinDDK\6001.18001\lib\win7\i386;C:\WinDDK\7600.16385.1\lib\win7\i386;$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">C:\WinDDK\6001.18001\lib\win7\i386;C:\WinDDK\7600.16385.1\lib\win7\i386;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\WinDDK_Includes;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">..\..\WinDDK_Includes;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\WinDDK\6001.18001\lib\wxp\i386;C:\WinDDK\7600.16385.1\lib\win7\i386;$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">C:\WinDDK\6001.18001\lib\wxp\i386;C:\WinDDK\7600.16385.1\lib\win7\i386;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\WinDDK_Includes;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\WinDDK\7600.16385.1\lib\win7\amd64;$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\WinDDK\7600.16385.1\lib\win7\amd64;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\WinDDK_Includes;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\include;..\..\..\..\src;..\..\WinDDK_Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;BUILD_DLL;WINDOWS;USB_PIO;SB_DLL;OOI_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ResourceOutputFileName>$(IntDir)%(Filename).res</ResourceOutputFileName>
+    </ResourceCompile>
+    <Link>
+      <RegisterOutput>false</RegisterOutput>
+      <AdditionalDependencies>winusb.lib;setupapi.lib;winmm.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\WinDDK\6001.18001\lib\wxp\i386</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>SeaBreeze.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Manifest>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+      <VerboseOutput>true</VerboseOutput>
+    </Manifest>
+    <PostBuildEvent>
+      <Command>mkdir ..\..\..\..\lib
+
+copy /b /v ..\Debug\SeaBreeze.* ..\..\..\..\lib</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\include;..\..\..\..\src;..\..\WinDDK_Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;BUILD_DLL;WINDOWS;USB_PIO;SB_DLL;OOI_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ResourceOutputFileName>$(IntDir)%(Filename).res</ResourceOutputFileName>
+    </ResourceCompile>
+    <Link>
+      <RegisterOutput>false</RegisterOutput>
+      <AdditionalDependencies>winusb.lib;setupapi.lib;winmm.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\WinDDK\6001.18001\lib\wxp\i386</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>SeaBreeze.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Manifest>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+      <VerboseOutput>true</VerboseOutput>
+    </Manifest>
+    <PostBuildEvent>
+      <Command>mkdir ..\..\..\..\lib
+
+copy /b /v ..\Debug\SeaBreeze.* ..\..\..\..\lib</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\include;..\..\..\..\src;..\..\WinDDK_Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDOWS;BUILD_DLL;WINDOWS;OOI_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winusb.lib;setupapi.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\WinDDK\6001.18001\lib\wlh\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>SeaBreeze.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir ..\..\..\..\lib
+
+copy /b /v ..\x64\Debug\SeaBreeze.* ..\..\..\..\lib</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>C:\WinDDK\6001.18001\lib\wxp\i386;..\..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDOWS;BUILD_DLL;WINDOWS;USB_PIO;SB_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winusb.lib;setupapi.lib;winmm.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>C:\WinDDK\6001.18001\lib\wxp\i386</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>.\SeaBreeze.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>
+      </OptimizeReferences>
+      <EnableCOMDATFolding>
+      </EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>
+      </LinkTimeCodeGeneration>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir ..\..\..\..\lib
+
+copy /b /v ..\Release\SeaBreeze.* ..\..\..\..\lib</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>C:\WinDDK\6001.18001\lib\wxp\i386;..\..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDOWS;BUILD_DLL;WINDOWS;USB_PIO;SB_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winusb.lib;setupapi.lib;winmm.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>C:\WinDDK\6001.18001\lib\wxp\i386</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>.\SeaBreeze.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>
+      </OptimizeReferences>
+      <EnableCOMDATFolding>
+      </EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>
+      </LinkTimeCodeGeneration>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir ..\..\..\..\lib
+
+copy /b /v ..\Release\SeaBreeze.* ..\..\..\..\lib</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>C:\WinDDK\6001.18001\lib\wxp\i386;..\..\..\..\src;..\..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDOWS;BUILD_DLL;WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winusb.lib;setupapi.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\WinDDK\6001.18001\lib\wlh\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>.\SeaBreeze.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir ..\..\..\..\lib
+
+copy /b /v ..\x64\Release\SeaBreeze.* ..\..\..\..\lib</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <!-- INCLUDES START HERE -->
+    <ClInclude Include="..\..\..\..\include\api\DeviceFactory.h" />
+    <ClInclude Include="..\..\..\..\include\api\DllDecl.h" />
+    <ClInclude Include="..\..\..\..\include\api\SeaBreezeWrapper.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\AcquisitionDelayFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\ContinuousStrobeFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\DataBufferFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\DeviceAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\EEPROMFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\FeatureAdapterInterface.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\FeatureAdapterTemplate.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\FeatureFamilies.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\IrradCalFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\LightSourceFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\NonlinearityCoeffsFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\OpticalBenchFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\PixelBinningFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\ProtocolFamilies.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\RawUSBBusAccessFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\RevisionFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\SeaBreezeAPI.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\SeaBreezeAPIConstants.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\SerialNumberFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\ShutterFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\SpectrometerFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\SpectrumProcessingFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\StrayLightCoeffsFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\StrobeLampFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\TemperatureFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\api\seabreezeapi\ThermoElectricCoolerFeatureAdapter.h" />
+    <ClInclude Include="..\..\..\..\include\common\ByteVector.h" />
+    <ClInclude Include="..\..\..\..\include\common\Data.h" />
+    <ClInclude Include="..\..\..\..\include\common\DoubleVector.h" />
+    <ClInclude Include="..\..\..\..\include\common\FloatVector.h" />
+    <ClInclude Include="..\..\..\..\include\common\Log.h" />
+    <ClInclude Include="..\..\..\..\include\common\SeaBreeze.h" />
+    <ClInclude Include="..\..\..\..\include\common\U32Vector.h" />
+    <ClInclude Include="..\..\..\..\include\common\UShortVector.h" />
+    <ClInclude Include="..\..\..\..\include\common\UnitDescriptor.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\Bus.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\BusFamilies.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\BusFamily.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\DeviceLocationProberInterface.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\DeviceLocatorInterface.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\TransferHelper.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\network\IPv4NetworkProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\network\IPv4SocketDeviceLocator.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\network\TCPIPv4SocketBus.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\network\TCPIPv4SocketTransferHelper.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\rs232\RS232DeviceLocator.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\rs232\RS232Interface.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\rs232\RS232TransferHelper.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\usb\USBDeviceLocator.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\usb\USBInterface.h" />
+    <ClInclude Include="..\..\..\..\include\common\buses\usb\USBTransferHelper.h" />
+    <ClInclude Include="..\..\..\..\include\common\devices\Device.h" />
+    <ClInclude Include="..\..\..\..\include\common\exceptions\BusConnectException.h" />
+    <ClInclude Include="..\..\..\..\include\common\exceptions\BusException.h" />
+    <ClInclude Include="..\..\..\..\include\common\exceptions\BusTransferException.h" />
+    <ClInclude Include="..\..\..\..\include\common\exceptions\FeatureControlException.h" />
+    <ClInclude Include="..\..\..\..\include\common\exceptions\FeatureException.h" />
+    <ClInclude Include="..\..\..\..\include\common\exceptions\FeatureProtocolNotFoundException.h" />
+    <ClInclude Include="..\..\..\..\include\common\exceptions\IllegalArgumentException.h" />
+    <ClInclude Include="..\..\..\..\include\common\exceptions\NumberFormatException.h" />
+    <ClInclude Include="..\..\..\..\include\common\exceptions\ProtocolBusMismatchException.h" />
+    <ClInclude Include="..\..\..\..\include\common\exceptions\ProtocolException.h" />
+    <ClInclude Include="..\..\..\..\include\common\exceptions\ProtocolFormatException.h" />
+    <ClInclude Include="..\..\..\..\include\common\exceptions\ProtocolTransactionException.h" />
+    <ClInclude Include="..\..\..\..\include\common\features\Feature.h" />
+    <ClInclude Include="..\..\..\..\include\common\features\FeatureFamily.h" />
+    <ClInclude Include="..\..\..\..\include\common\features\FeatureImpl.h" />
+    <ClInclude Include="..\..\..\..\include\common\globals.h" />
+    <ClInclude Include="..\..\..\..\include\common\protocols\Exchange.h" />
+    <ClInclude Include="..\..\..\..\include\common\protocols\Protocol.h" />
+    <ClInclude Include="..\..\..\..\include\common\protocols\ProtocolFamily.h" />
+    <ClInclude Include="..\..\..\..\include\common\protocols\ProtocolHelper.h" />
+    <ClInclude Include="..\..\..\..\include\common\protocols\ProtocolHint.h" />
+    <ClInclude Include="..\..\..\..\include\common\protocols\Transaction.h" />
+    <ClInclude Include="..\..\..\..\include\common\protocols\Transfer.h" />
+    <ClInclude Include="..\..\..\..\include\native\network\Inet4Address.h" />
+    <ClInclude Include="..\..\..\..\include\native\network\Socket.h" />
+    <ClInclude Include="..\..\..\..\include\native\network\SocketException.h" />
+    <ClInclude Include="..\..\..\..\include\native\network\SocketTimeoutException.h" />
+    <ClInclude Include="..\..\..\..\include\native\network\UnknownHostException.h" />
+    <ClInclude Include="..\..\..\..\include\native\network\windows\NativeSocketWindows.h" />
+    <ClInclude Include="..\..\..\..\include\native\rs232\NativeRS232.h" />
+    <ClInclude Include="..\..\..\..\include\native\rs232\RS232.h" />
+    <ClInclude Include="..\..\..\..\include\native\rs232\windows\NativeRS232Windows.h" />
+    <ClInclude Include="..\..\..\..\include\native\system\NativeSystem.h" />
+    <ClInclude Include="..\..\..\..\include\native\system\System.h" />
+    <ClInclude Include="..\..\..\..\include\native\usb\NativeUSB.h" />
+    <ClInclude Include="..\..\..\..\include\native\usb\USB.h" />
+    <ClInclude Include="..\..\..\..\include\native\usb\USBDiscovery.h" />
+    <ClInclude Include="..\..\..\..\include\native\usb\winusb\WindowsGUID.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\network\BlazeTCPIPv4.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\network\JazTCPIPv4.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\rs232\OOIRS232Interface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\ApexUSB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\BlazeUSB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\BlazeUSBTransferHelper.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\FlameNIRUSB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\HR2000PlusUSB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\HR2000USB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\HR4000USB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\JazUSB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\Maya2000ProUSB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\Maya2000USB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\MayaLSLUSB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\NIRQuest256USB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\NIRQuest512USB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSB4KSpectrumTransferHelper.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSBControlTransferHelper.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSBEndpointMaps.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSBInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSBProductID.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSBSpectrumTransferHelper.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSBTrivialTransferHelper.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\QE65000USB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\QEProUSB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\STSUSB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\SparkUSB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\TorusUSB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\USB2000PlusUSB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\USB2000USB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\USB4000USB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\buses\usb\VentanaUSB.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\Apex.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\Blaze.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\FlameNIR.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\HR2000.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\HR2000Plus.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\HR4000.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\Jaz.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\Maya2000.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\Maya2000Pro.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\MayaLSL.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\NIRQuest256.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\NIRQuest512.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\QE65000.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\QEPro.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\STS.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\Spark.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\Torus.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\USB2000.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\USB2000Plus.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\USB4000.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\devices\Ventana.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\acquisition_delay\AcquisitionDelayFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\acquisition_delay\AcquisitionDelayFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\acquisition_delay\AcquisitionDelayFeature_FPGA.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\acquisition_delay\STSAcquisitionDelayFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\continuous_strobe\ContinuousStrobeFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\continuous_strobe\ContinuousStrobeFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\continuous_strobe\ContinuousStrobeFeature_FPGA.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\data_buffer\DataBufferFeatureBase.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\data_buffer\DataBufferFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\data_buffer\QEProDataBufferFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\EEPROMSlotFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\EEPROMSlotFeatureBase.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\EEPROMSlotFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\NonlinearityEEPROMSlotFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeatureBase.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeature_MayaPro.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeature_NIRQuest.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\SerialNumberEEPROMSlotFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\StrayLightEEPROMSlotFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\WavelengthEEPROMSlotFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\WavelengthEEPROMSlotFeature_QE65000.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\fpga_register\FPGARegisterFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\fpga_register\FPGARegisterFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\irradcal\IrradCalFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\irradcal\IrradCalFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\light_source\LightSourceFeatureBase.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\light_source\LightSourceFeatureImpl.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\light_source\LightSourceFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\light_source\StrobeLampFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\light_source\StrobeLampFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\light_source\VentanaLightSourceFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\nonlinearity\NonlinearityCoeffsFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\nonlinearity\NonlinearityCoeffsFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\optical_bench\OpticalBenchFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\optical_bench\OpticalBenchFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\pixel_binning\PixelBinningFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\pixel_binning\STSPixelBinningFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\raw_bus_access\RawUSBBusAccessFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\raw_bus_access\RawUSBBusAccessFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\revision\RevisionFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\revision\RevisionFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\serial_number\SerialNumberFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\serial_number\SerialNumberFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\shutter\ShutterFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\shutter\ShutterFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\ApexSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\BlazeSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\FlameNIRSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\GainAdjustedSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\HR2000PlusSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\HR2000SpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\HR4000SpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\JazSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\Maya2000ProSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\Maya2000SpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\MayaLSLSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\NIRQuest256SpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\NIRQuest512SpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\NIRQuestSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\OOISpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\OOISpectrometerFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeatureBase.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeatureImpl.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\QE65000SpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\QEProSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\STSSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\SparkSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\SpectrometerTriggerMode.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\USB2000PlusSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\USB2000SpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\USB4000SpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\VentanaSpectrometerFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrum_processing\SpectrumProcessingFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\spectrum_processing\SpectrumProcessingFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\stray_light\StrayLightCoeffsFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\stray_light\StrayLightCoeffsFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\temperature\TemperatureFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\temperature\TemperatureFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\thermoelectric\QEProThermoElectricFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\thermoelectric\ThermoElectricFeatureBase.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\thermoelectric\ThermoElectricFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\thermoelectric\ThermoElectricQEFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\thermoelectric\VentanaThermoElectricFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\wavecal\WaveCalFeature.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\features\wavecal\WaveCalFeatureInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\AcquisitionDelayProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\ContinuousStrobeProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\DataBufferProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\EEPROMProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\FPGARegisterProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\IrradCalProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\LightSourceProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\NonlinearityCoeffsProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\OpticalBenchProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\PixelBinningProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\ProgrammableSaturationProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\RevisionProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\SerialNumberProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\ShutterProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\SpectrometerProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\SpectrumProcessingProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\StrayLightCoeffsProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\StrobeLampProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\TemperatureProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\ThermoElectricProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\WaveCalProtocolInterface.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\constants\OBPMessageTypes.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPCommand.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPContinuousStrobeEnableExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPContinuousStrobePeriodExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPDataBufferClearExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetAllTemperaturesExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetBoxcarWidthExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDataBufferCapacityExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDataBufferElementCountExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDataBufferMaximumCapacityExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDefaultPixelBinningExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetFirmwareRevisionExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetHardwareRevisionExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetIrradCalExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetIrradCollectionAreaExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetMaxPixelBinningExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetNonlinearityCoeffExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetNonlinearityCoeffsCountExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchCoatingExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchFiberDiameterMicronsExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchFilterExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchGratingExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchIDExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchSerialNumberExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchSlitWidthMicronsExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetPixelBinningExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetSaturationExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetScansToAverageExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetSerialNumberExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetSerialNumberMaximumLengthExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetStrayLightCoeffExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetStrayLightCoeffsCountExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetTemperatureCountExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetTemperatureExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetThermoElectricTemperatureExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetWaveCalExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPIntegrationTimeExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPLampEnableCommand.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceEnableCommand.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceEnabledQuery.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceIntensityCommand.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceIntensityQuery.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPMessage.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPQuery.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPReadRawSpectrum32AndMetadataExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPReadRawSpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPReadSpectrum32AndMetadataExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPReadSpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPReadSpectrumWithGainExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPRequestBufferedSpectrum32AndMetadataExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPRequestRawSpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPRequestSpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetAcquisitionDelayExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetBoxcarWidthExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetDataBufferCapacityExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetDefaultPixelBinningExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetIrradCalExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetIrradCollectionAreaExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetPixelBinningExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetScansToAverageExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetThermoElectricEnableExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetThermoElectricSetpointExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPShutterExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPTransaction.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPTriggerModeExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\hints\OBPControlHint.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\hints\OBPSpectrumHint.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPAcquisitionDelayProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPContinuousStrobeProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPDataBufferProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPIrradCalProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPLightSourceProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPLightSourceProtocol_Ventana.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPNonlinearityCoeffsProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPOpticalBenchProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPPixelBinningProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPProgrammableSaturationProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPRevisionProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPSerialNumberProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPShutterProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPSpectrometerProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPSpectrumProcessingProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPStrayLightCoeffsProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPStrobeLampProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPTemperatureProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPThermoElectricProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPWaveCalProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OceanBinaryProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\constants\FPGARegisterCodes.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\constants\OpCodes.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\constants\QETECConstants.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\FPGARegisterReadExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\FPGARegisterWriteExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\FPGASpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\FlameNIRSpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\HRFPGASpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\IntegrationTimeExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\JazSpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\MayaProSpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\NIRQuestSpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\OOI2KSpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\OOIIrradCalExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\OOIReadIrradCalExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\OOIWriteIrradCalExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\QESpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\ReadEEPROMSlotExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\ReadSpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\ReadTECQETemperatureExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\ReadTECTemperatureExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\RequestSpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\StrobeEnableExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\TECEnableExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\TECQEEnableExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\TriggerModeExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\USBFPGASpectrumExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\WriteEEPROMSlotExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\WriteTECQESetPointExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\WriteTECSetPointExchange.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\hints\ControlHint.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\hints\SpectrumHint.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\FPGARegisterProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\OOIEEPROMProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\OOIIrradCalProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\OOIProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\OOISpectrometerProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\OOIStrobeLampProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\OOITECProtocol.h" />
+    <ClInclude Include="..\..\..\..\include\vendors\OceanOptics\utils\Polynomial.h" />
+    <!-- INCLUDES END HERE -->
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SeaBreeze.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\SeaBreeze.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- SOURCES START HERE -->
+    <ClCompile Include="..\..\..\..\src\api\DeviceFactory.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\SeaBreezeWrapper.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\AcquisitionDelayFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\ContinuousStrobeFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\DataBufferFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\DeviceAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\EEPROMFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\FeatureFamilies.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\IrradCalFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\LightSourceFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\NonlinearityCoeffsFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\OpticalBenchFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\PixelBinningFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\ProtocolFamilies.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\RawUSBBusAccessFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\RevisionFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\SeaBreezeAPI.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\SerialNumberFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\ShutterFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\SpectrometerFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\SpectrumProcessingFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\StrayLightCoeffsFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\StrobeLampFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\TemperatureFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\api\seabreezeapi\ThermoElectricCoolerFeatureAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\ByteVector.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\Data.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\DoubleVector.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\FloatVector.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\Log.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\U32Vector.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\UShortVector.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\UnitDescriptor.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\Bus.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\BusFamilies.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\BusFamily.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\DeviceLocationProberInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\TransferHelper.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\network\IPv4NetworkProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\network\IPv4SocketDeviceLocator.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\network\TCPIPv4SocketBus.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\network\TCPIPv4SocketTransferHelper.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\rs232\RS232DeviceLocator.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\rs232\RS232Interface.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\rs232\RS232TransferHelper.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\usb\USBDeviceLocator.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\usb\USBInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\buses\usb\USBTransferHelper.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\devices\Device.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\exceptions\BusConnectException.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\exceptions\BusException.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\exceptions\BusTransferException.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\exceptions\FeatureControlException.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\exceptions\FeatureException.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\exceptions\FeatureProtocolNotFoundException.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\exceptions\IllegalArgumentException.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\exceptions\NumberFormatException.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\exceptions\ProtocolBusMismatchException.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\exceptions\ProtocolException.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\exceptions\ProtocolFormatException.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\exceptions\ProtocolTransactionException.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\features\FeatureFamily.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\features\FeatureImpl.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\protocols\Exchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\protocols\Protocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\protocols\ProtocolFamily.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\protocols\ProtocolHelper.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\protocols\ProtocolHint.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\protocols\Transaction.cpp" />
+    <ClCompile Include="..\..\..\..\src\common\protocols\Transfer.cpp" />
+    <ClCompile Include="..\..\..\..\src\native\network\Inet4Address.cpp" />
+    <ClCompile Include="..\..\..\..\src\native\network\SocketException.cpp" />
+    <ClCompile Include="..\..\..\..\src\native\network\SocketTimeoutException.cpp" />
+    <ClCompile Include="..\..\..\..\src\native\network\UnknownHostException.cpp" />
+    <ClCompile Include="..\..\..\..\src\native\network\windows\NativeSocketWindows.cpp" />
+    <ClCompile Include="..\..\..\..\src\native\rs232\RS232.cpp" />
+    <ClCompile Include="..\..\..\..\src\native\rs232\windows\NativeRS232Windows.c" />
+    <ClCompile Include="..\..\..\..\src\native\system\System.cpp" />
+    <ClCompile Include="..\..\..\..\src\native\system\windows\NativeSystemWindows.c" />
+    <ClCompile Include="..\..\..\..\src\native\usb\USB.cpp" />
+    <ClCompile Include="..\..\..\..\src\native\usb\USBDiscovery.cpp" />
+    <ClCompile Include="..\..\..\..\src\native\usb\winusb\NativeUSBWinUSB.c" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\network\BlazeTCPIPv4.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\network\JazTCPIPv4.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\rs232\OOIRS232Interface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\ApexUSB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\BlazeUSB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\BlazeUSBTransferHelper.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\FlameNIRUSB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\HR2000PlusUSB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\HR2000USB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\HR4000USB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\JazUSB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\Maya2000ProUSB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\Maya2000USB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\MayaLSLUSB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\NIRQuest256USB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\NIRQuest512USB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\OOIUSB4KSpectrumTransferHelper.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\OOIUSBControlTransferHelper.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\OOIUSBEndpointMaps.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\OOIUSBInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\OOIUSBSpectrumTransferHelper.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\OOIUSBTrivialTransferHelper.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\QE65000USB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\QEProUSB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\STSUSB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\SparkUSB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\TorusUSB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\USB2000PlusUSB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\USB2000USB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\USB4000USB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\buses\usb\VentanaUSB.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\Apex.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\Blaze.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\FlameNIR.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\HR2000.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\HR2000Plus.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\HR4000.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\Jaz.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\Maya2000.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\Maya2000Pro.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\MayaLSL.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\NIRQuest256.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\NIRQuest512.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\QE65000.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\QEPro.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\STS.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\Spark.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\Torus.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\USB2000.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\USB2000Plus.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\USB4000.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\devices\Ventana.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\acquisition_delay\AcquisitionDelayFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\acquisition_delay\AcquisitionDelayFeature_FPGA.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\acquisition_delay\STSAcquisitionDelayFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\continuous_strobe\ContinuousStrobeFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\continuous_strobe\ContinuousStrobeFeature_FPGA.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\data_buffer\DataBufferFeatureBase.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\data_buffer\QEProDataBufferFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\EEPROMSlotFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\EEPROMSlotFeatureBase.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\NonlinearityEEPROMSlotFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeatureBase.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeature_MayaPro.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeature_NIRQuest.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\SerialNumberEEPROMSlotFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\StrayLightEEPROMSlotFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\WavelengthEEPROMSlotFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\WavelengthEEPROMSlotFeature_QE65000.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\fpga_register\FPGARegisterFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\irradcal\IrradCalFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\light_source\LightSourceFeatureBase.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\light_source\LightSourceFeatureImpl.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\light_source\StrobeLampFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\light_source\VentanaLightSourceFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\nonlinearity\NonlinearityCoeffsFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\optical_bench\OpticalBenchFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\pixel_binning\PixelBinningFeatureInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\pixel_binning\STSPixelBinningFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\raw_bus_access\RawUSBBusAccessFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\revision\RevisionFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\serial_number\SerialNumberFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\shutter\ShutterFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\ApexSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\BlazeSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\FlameNIRSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\GainAdjustedSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\HR2000PlusSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\HR2000SpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\HR4000SpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\JazSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\Maya2000ProSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\Maya2000SpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\MayaLSLSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\NIRQuest256SpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\NIRQuest512SpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\NIRQuestSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\OOISpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeatureBase.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeatureImpl.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\QE65000SpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\QEProSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\STSSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\SparkSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\SpectrometerTriggerMode.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\USB2000PlusSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\USB2000SpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\USB4000SpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\VentanaSpectrometerFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\spectrum_processing\SpectrumProcessingFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\stray_light\StrayLightCoeffsFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\temperature\TemperatureFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\thermoelectric\QEProThermoElectricFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\thermoelectric\ThermoElectricFeatureBase.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\thermoelectric\ThermoElectricQEFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\thermoelectric\VentanaThermoElectricFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\features\wavecal\WaveCalFeature.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\AcquisitionDelayProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\ContinuousStrobeProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\DataBufferProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\EEPROMProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\FPGARegisterProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\IrradCalProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\LightSourceProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\NonlinearityCoeffsProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\OpticalBenchProtocolInteface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\PixelBinningProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\ProgrammableSaturationProtocolInteface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\RevisionProtocolInteface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\SerialNumberProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\ShutterProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\SpectrometerProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\SpectrumProcessingProtocolInteface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\StrayLightCoeffsProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\StrobeLampProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\TemperatureProtocolInteface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\ThermoElectricProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\WaveCalProtocolInterface.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPCommand.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPContinuousStrobeEnableExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPContinuousStrobePeriodExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPDataBufferClearExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetAllTemperaturesExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetBoxcarWidthExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDataBufferCapacityExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDataBufferCountExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDataBufferMaximumCapacityExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDefaultPixelBinningExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetFirmwareRevisionExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetHardwareRevisionExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetIrradCalExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetIrradCollectionAreaExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetMaxPixelBinningExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetNonlinearityCoeffExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetNonlinearityCoeffsCountExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchCoatingExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchFiberDiameterMicronsExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchFilterExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchGratingExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchIDExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchSerialNumberExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchSlitWidthMicronsExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetPixelBinningExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetSaturationExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetScansToAverageExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetSerialNumberExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetSerialNumberMaximumLengthExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetStrayLightCoeffExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetStrayLightCoeffsCountExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetTemperatureCountExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetTemperatureExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetThermoElectricTemperatureExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetWaveCalExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPIntegrationTimeExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPLampEnableCommand.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceEnableCommand.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceEnabledQuery.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceIntensityCommand.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceIntensityQuery.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPMessage.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPQuery.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPReadRawSpectrum32AndMetadataExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPReadRawSpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPReadSpectrum32AndMetadataExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPReadSpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPReadSpectrumWithGainExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPRequestBufferedSpectrum32AndMetadata.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPRequestRawSpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPRequestSpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetAcquisitionDelayExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetBoxcarWidthExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetDataBufferCapacityExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetDefaultPixelBinningFactorExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetIrradCalExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetIrradCollectionAreaExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetPixelBinningExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetScansToAverageExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetThermoElectricEnableExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetThermoElectricSetpointExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPShutterExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPTransaction.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPTriggerModeExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\hints\OBPControlHint.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\hints\OBPSpectrumHint.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPAcquisitionDelayProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPContinuousStrobeProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPDataBufferProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPIrradCalProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPLightSourceProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPLightSourceProtocol_Ventana.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPNonlinearityCoeffsProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPOpticalBenchProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPPixelBinningProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPProgrammableSaturationProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPRevisionProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPSerialNumberProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPShutterProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPSpectrometerProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPSpectrumProcessingProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPStrayLightCoeffsProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPStrobeLampProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPTemperatureProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPThermoElectricProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPWaveCalProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OceanBinaryProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\constants\FPGARegisterCodes.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\constants\OpCodes.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\FPGARegisterReadExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\FPGARegisterWriteExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\FPGASpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\FlameNIRSpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\HRFPGASpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\IntegrationTimeExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\JazSpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\MayaProSpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\NIRQuestSpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\OOI2KSpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\OOIIrradCalExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\OOIReadIrradCalExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\OOIWriteIrradCalExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\QESpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\ReadEEPROMSlotExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\ReadSpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\ReadTECQETemperatureExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\ReadTECTemperatureExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\RequestSpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\StrobeEnableExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\TECEnableExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\TECQEEnableExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\TriggerModeExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\USBFPGASpectrumExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\WriteEEPROMSlotExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\WriteTECQESetPointExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\WriteTECSetPointExchange.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\hints\ControlHint.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\hints\SpectrumHint.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\FPGARegisterProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\OOIEEPROMProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\OOIIrradCalProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\OOIProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\OOISpectrometerProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\OOIStrobeLampProtocol.cpp" />
+    <ClCompile Include="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\OOITECProtocol.cpp" />
+    <!-- SOURCES END HERE -->
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

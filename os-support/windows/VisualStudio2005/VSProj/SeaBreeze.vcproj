@@ -1,0 +1,924 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="SeaBreeze"
+	ProjectGUID="{1282E9E9-C3DB-4F4F-9560-4E5D0539B457}"
+	RootNamespace="SeaBreeze"
+	Keyword="Win32Proj"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\..\..\include;..\..\WinDDK_Includes"
+				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;WINDOWS;BUILD_DLL;WIN32;_DEBUG;_WINDOWS;_USRDLL;SEABREEZE_EXPORTS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="4"
+				DisableSpecificWarnings="4290"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="winusb.lib setupapi.lib ws2_32.lib"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="C:\WinDDK\7600.16385.1\lib\wxp\i386"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;SEABREEZE_EXPORTS"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkIncremental="1"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
+		</Filter>
+		<Filter
+			Name="Source"
+			>
+            <!-- INCLUDES START HERE -->
+			<File RelativePath="..\..\..\..\include\api\DeviceFactory.h"></File>
+			<File RelativePath="..\..\..\..\include\api\DllDecl.h"></File>
+			<File RelativePath="..\..\..\..\include\api\SeaBreezeWrapper.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\AcquisitionDelayFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\ContinuousStrobeFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\DataBufferFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\DeviceAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\EEPROMFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\FeatureAdapterInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\FeatureAdapterTemplate.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\FeatureFamilies.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\IrradCalFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\LightSourceFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\NonlinearityCoeffsFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\OpticalBenchFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\PixelBinningFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\ProtocolFamilies.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\RawUSBBusAccessFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\RevisionFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\SeaBreezeAPI.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\SeaBreezeAPIConstants.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\SerialNumberFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\ShutterFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\SpectrometerFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\SpectrumProcessingFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\StrayLightCoeffsFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\StrobeLampFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\TemperatureFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\api\seabreezeapi\ThermoElectricCoolerFeatureAdapter.h"></File>
+			<File RelativePath="..\..\..\..\include\common\ByteVector.h"></File>
+			<File RelativePath="..\..\..\..\include\common\Data.h"></File>
+			<File RelativePath="..\..\..\..\include\common\DoubleVector.h"></File>
+			<File RelativePath="..\..\..\..\include\common\FloatVector.h"></File>
+			<File RelativePath="..\..\..\..\include\common\Log.h"></File>
+			<File RelativePath="..\..\..\..\include\common\SeaBreeze.h"></File>
+			<File RelativePath="..\..\..\..\include\common\U32Vector.h"></File>
+			<File RelativePath="..\..\..\..\include\common\UShortVector.h"></File>
+			<File RelativePath="..\..\..\..\include\common\UnitDescriptor.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\Bus.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\BusFamilies.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\BusFamily.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\DeviceLocationProberInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\DeviceLocatorInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\TransferHelper.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\network\IPv4NetworkProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\network\IPv4SocketDeviceLocator.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\network\TCPIPv4SocketBus.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\network\TCPIPv4SocketTransferHelper.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\rs232\RS232DeviceLocator.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\rs232\RS232Interface.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\rs232\RS232TransferHelper.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\usb\USBDeviceLocator.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\usb\USBInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\common\buses\usb\USBTransferHelper.h"></File>
+			<File RelativePath="..\..\..\..\include\common\devices\Device.h"></File>
+			<File RelativePath="..\..\..\..\include\common\exceptions\BusConnectException.h"></File>
+			<File RelativePath="..\..\..\..\include\common\exceptions\BusException.h"></File>
+			<File RelativePath="..\..\..\..\include\common\exceptions\BusTransferException.h"></File>
+			<File RelativePath="..\..\..\..\include\common\exceptions\FeatureControlException.h"></File>
+			<File RelativePath="..\..\..\..\include\common\exceptions\FeatureException.h"></File>
+			<File RelativePath="..\..\..\..\include\common\exceptions\FeatureProtocolNotFoundException.h"></File>
+			<File RelativePath="..\..\..\..\include\common\exceptions\IllegalArgumentException.h"></File>
+			<File RelativePath="..\..\..\..\include\common\exceptions\NumberFormatException.h"></File>
+			<File RelativePath="..\..\..\..\include\common\exceptions\ProtocolBusMismatchException.h"></File>
+			<File RelativePath="..\..\..\..\include\common\exceptions\ProtocolException.h"></File>
+			<File RelativePath="..\..\..\..\include\common\exceptions\ProtocolFormatException.h"></File>
+			<File RelativePath="..\..\..\..\include\common\exceptions\ProtocolTransactionException.h"></File>
+			<File RelativePath="..\..\..\..\include\common\features\Feature.h"></File>
+			<File RelativePath="..\..\..\..\include\common\features\FeatureFamily.h"></File>
+			<File RelativePath="..\..\..\..\include\common\features\FeatureImpl.h"></File>
+			<File RelativePath="..\..\..\..\include\common\globals.h"></File>
+			<File RelativePath="..\..\..\..\include\common\protocols\Exchange.h"></File>
+			<File RelativePath="..\..\..\..\include\common\protocols\Protocol.h"></File>
+			<File RelativePath="..\..\..\..\include\common\protocols\ProtocolFamily.h"></File>
+			<File RelativePath="..\..\..\..\include\common\protocols\ProtocolHelper.h"></File>
+			<File RelativePath="..\..\..\..\include\common\protocols\ProtocolHint.h"></File>
+			<File RelativePath="..\..\..\..\include\common\protocols\Transaction.h"></File>
+			<File RelativePath="..\..\..\..\include\common\protocols\Transfer.h"></File>
+			<File RelativePath="..\..\..\..\include\native\network\Inet4Address.h"></File>
+			<File RelativePath="..\..\..\..\include\native\network\Socket.h"></File>
+			<File RelativePath="..\..\..\..\include\native\network\SocketException.h"></File>
+			<File RelativePath="..\..\..\..\include\native\network\SocketTimeoutException.h"></File>
+			<File RelativePath="..\..\..\..\include\native\network\UnknownHostException.h"></File>
+			<File RelativePath="..\..\..\..\include\native\network\windows\NativeSocketWindows.h"></File>
+			<File RelativePath="..\..\..\..\include\native\rs232\NativeRS232.h"></File>
+			<File RelativePath="..\..\..\..\include\native\rs232\RS232.h"></File>
+			<File RelativePath="..\..\..\..\include\native\rs232\windows\NativeRS232Windows.h"></File>
+			<File RelativePath="..\..\..\..\include\native\system\NativeSystem.h"></File>
+			<File RelativePath="..\..\..\..\include\native\system\System.h"></File>
+			<File RelativePath="..\..\..\..\include\native\usb\NativeUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\native\usb\USB.h"></File>
+			<File RelativePath="..\..\..\..\include\native\usb\USBDiscovery.h"></File>
+			<File RelativePath="..\..\..\..\include\native\usb\winusb\WindowsGUID.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\network\BlazeTCPIPv4.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\network\JazTCPIPv4.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\rs232\OOIRS232Interface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\ApexUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\BlazeUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\BlazeUSBTransferHelper.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\FlameNIRUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\HR2000PlusUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\HR2000USB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\HR4000USB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\JazUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\Maya2000ProUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\Maya2000USB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\MayaLSLUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\NIRQuest256USB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\NIRQuest512USB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSB4KSpectrumTransferHelper.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSBControlTransferHelper.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSBEndpointMaps.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSBInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSBProductID.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSBSpectrumTransferHelper.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\OOIUSBTrivialTransferHelper.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\QE65000USB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\QEProUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\STSUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\SparkUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\TorusUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\USB2000PlusUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\USB2000USB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\USB4000USB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\buses\usb\VentanaUSB.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\Apex.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\Blaze.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\FlameNIR.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\HR2000.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\HR2000Plus.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\HR4000.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\Jaz.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\Maya2000.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\Maya2000Pro.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\MayaLSL.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\NIRQuest256.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\NIRQuest512.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\QE65000.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\QEPro.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\STS.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\Spark.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\Torus.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\USB2000.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\USB2000Plus.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\USB4000.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\devices\Ventana.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\acquisition_delay\AcquisitionDelayFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\acquisition_delay\AcquisitionDelayFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\acquisition_delay\AcquisitionDelayFeature_FPGA.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\acquisition_delay\STSAcquisitionDelayFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\continuous_strobe\ContinuousStrobeFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\continuous_strobe\ContinuousStrobeFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\continuous_strobe\ContinuousStrobeFeature_FPGA.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\data_buffer\DataBufferFeatureBase.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\data_buffer\DataBufferFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\data_buffer\QEProDataBufferFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\EEPROMSlotFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\EEPROMSlotFeatureBase.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\EEPROMSlotFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\NonlinearityEEPROMSlotFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeatureBase.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeature_MayaPro.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeature_NIRQuest.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\SerialNumberEEPROMSlotFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\StrayLightEEPROMSlotFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\WavelengthEEPROMSlotFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\eeprom_slots\WavelengthEEPROMSlotFeature_QE65000.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\fpga_register\FPGARegisterFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\fpga_register\FPGARegisterFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\irradcal\IrradCalFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\irradcal\IrradCalFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\light_source\LightSourceFeatureBase.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\light_source\LightSourceFeatureImpl.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\light_source\LightSourceFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\light_source\StrobeLampFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\light_source\StrobeLampFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\light_source\VentanaLightSourceFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\nonlinearity\NonlinearityCoeffsFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\nonlinearity\NonlinearityCoeffsFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\optical_bench\OpticalBenchFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\optical_bench\OpticalBenchFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\pixel_binning\PixelBinningFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\pixel_binning\STSPixelBinningFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\raw_bus_access\RawUSBBusAccessFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\raw_bus_access\RawUSBBusAccessFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\revision\RevisionFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\revision\RevisionFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\serial_number\SerialNumberFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\serial_number\SerialNumberFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\shutter\ShutterFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\shutter\ShutterFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\ApexSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\BlazeSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\FlameNIRSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\GainAdjustedSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\HR2000PlusSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\HR2000SpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\HR4000SpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\JazSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\Maya2000ProSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\Maya2000SpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\MayaLSLSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\NIRQuest256SpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\NIRQuest512SpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\NIRQuestSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\OOISpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\OOISpectrometerFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeatureBase.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeatureImpl.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\QE65000SpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\QEProSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\STSSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\SparkSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\SpectrometerTriggerMode.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\USB2000PlusSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\USB2000SpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\USB4000SpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrometer\VentanaSpectrometerFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrum_processing\SpectrumProcessingFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\spectrum_processing\SpectrumProcessingFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\stray_light\StrayLightCoeffsFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\stray_light\StrayLightCoeffsFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\temperature\TemperatureFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\temperature\TemperatureFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\thermoelectric\QEProThermoElectricFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\thermoelectric\ThermoElectricFeatureBase.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\thermoelectric\ThermoElectricFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\thermoelectric\ThermoElectricQEFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\thermoelectric\VentanaThermoElectricFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\wavecal\WaveCalFeature.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\features\wavecal\WaveCalFeatureInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\AcquisitionDelayProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\ContinuousStrobeProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\DataBufferProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\EEPROMProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\FPGARegisterProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\IrradCalProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\LightSourceProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\NonlinearityCoeffsProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\OpticalBenchProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\PixelBinningProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\ProgrammableSaturationProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\RevisionProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\SerialNumberProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\ShutterProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\SpectrometerProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\SpectrumProcessingProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\StrayLightCoeffsProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\StrobeLampProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\TemperatureProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\ThermoElectricProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\interfaces\WaveCalProtocolInterface.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\constants\OBPMessageTypes.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPCommand.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPContinuousStrobeEnableExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPContinuousStrobePeriodExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPDataBufferClearExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetAllTemperaturesExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetBoxcarWidthExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDataBufferCapacityExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDataBufferElementCountExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDataBufferMaximumCapacityExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDefaultPixelBinningExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetFirmwareRevisionExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetHardwareRevisionExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetIrradCalExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetIrradCollectionAreaExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetMaxPixelBinningExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetNonlinearityCoeffExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetNonlinearityCoeffsCountExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchCoatingExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchFiberDiameterMicronsExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchFilterExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchGratingExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchIDExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchSerialNumberExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchSlitWidthMicronsExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetPixelBinningExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetSaturationExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetScansToAverageExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetSerialNumberExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetSerialNumberMaximumLengthExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetStrayLightCoeffExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetStrayLightCoeffsCountExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetTemperatureCountExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetTemperatureExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetThermoElectricTemperatureExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPGetWaveCalExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPIntegrationTimeExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPLampEnableCommand.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceEnableCommand.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceEnabledQuery.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceIntensityCommand.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceIntensityQuery.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPMessage.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPQuery.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPReadRawSpectrum32AndMetadataExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPReadRawSpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPReadSpectrum32AndMetadataExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPReadSpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPReadSpectrumWithGainExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPRequestBufferedSpectrum32AndMetadataExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPRequestRawSpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPRequestSpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetAcquisitionDelayExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetBoxcarWidthExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetDataBufferCapacityExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetDefaultPixelBinningExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetIrradCalExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetIrradCollectionAreaExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetPixelBinningExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetScansToAverageExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetThermoElectricEnableExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPSetThermoElectricSetpointExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPShutterExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPTransaction.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\exchanges\OBPTriggerModeExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\hints\OBPControlHint.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\hints\OBPSpectrumHint.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPAcquisitionDelayProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPContinuousStrobeProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPDataBufferProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPIrradCalProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPLightSourceProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPLightSourceProtocol_Ventana.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPNonlinearityCoeffsProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPOpticalBenchProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPPixelBinningProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPProgrammableSaturationProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPRevisionProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPSerialNumberProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPShutterProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPSpectrometerProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPSpectrumProcessingProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPStrayLightCoeffsProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPStrobeLampProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPTemperatureProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPThermoElectricProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OBPWaveCalProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\obp\impls\OceanBinaryProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\constants\FPGARegisterCodes.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\constants\OpCodes.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\constants\QETECConstants.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\FPGARegisterReadExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\FPGARegisterWriteExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\FPGASpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\FlameNIRSpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\HRFPGASpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\IntegrationTimeExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\JazSpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\MayaProSpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\NIRQuestSpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\OOI2KSpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\OOIIrradCalExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\OOIReadIrradCalExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\OOIWriteIrradCalExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\QESpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\ReadEEPROMSlotExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\ReadSpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\ReadTECQETemperatureExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\ReadTECTemperatureExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\RequestSpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\StrobeEnableExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\TECEnableExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\TECQEEnableExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\TriggerModeExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\USBFPGASpectrumExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\WriteEEPROMSlotExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\WriteTECQESetPointExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\exchanges\WriteTECSetPointExchange.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\hints\ControlHint.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\hints\SpectrumHint.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\FPGARegisterProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\OOIEEPROMProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\OOIIrradCalProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\OOIProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\OOISpectrometerProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\OOIStrobeLampProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\protocols\ooi\impls\OOITECProtocol.h"></File>
+			<File RelativePath="..\..\..\..\include\vendors\OceanOptics\utils\Polynomial.h"></File>
+            <!-- INCLUDES END HERE -->
+
+            <!-- SOURCES START HERE -->
+			<File RelativePath="..\..\..\..\src\api\DeviceFactory.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\SeaBreezeWrapper.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\AcquisitionDelayFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\ContinuousStrobeFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\DataBufferFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\DeviceAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\EEPROMFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\FeatureFamilies.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\IrradCalFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\LightSourceFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\NonlinearityCoeffsFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\OpticalBenchFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\PixelBinningFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\ProtocolFamilies.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\RawUSBBusAccessFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\RevisionFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\SeaBreezeAPI.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\SerialNumberFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\ShutterFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\SpectrometerFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\SpectrumProcessingFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\StrayLightCoeffsFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\StrobeLampFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\TemperatureFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\api\seabreezeapi\ThermoElectricCoolerFeatureAdapter.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\ByteVector.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\Data.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\DoubleVector.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\FloatVector.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\Log.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\U32Vector.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\UShortVector.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\UnitDescriptor.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\Bus.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\BusFamilies.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\BusFamily.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\DeviceLocationProberInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\TransferHelper.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\network\IPv4NetworkProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\network\IPv4SocketDeviceLocator.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\network\TCPIPv4SocketBus.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\network\TCPIPv4SocketTransferHelper.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\rs232\RS232DeviceLocator.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\rs232\RS232Interface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\rs232\RS232TransferHelper.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\usb\USBDeviceLocator.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\usb\USBInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\buses\usb\USBTransferHelper.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\devices\Device.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\exceptions\BusConnectException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\exceptions\BusException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\exceptions\BusTransferException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\exceptions\FeatureControlException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\exceptions\FeatureException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\exceptions\FeatureProtocolNotFoundException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\exceptions\IllegalArgumentException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\exceptions\NumberFormatException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\exceptions\ProtocolBusMismatchException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\exceptions\ProtocolException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\exceptions\ProtocolFormatException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\exceptions\ProtocolTransactionException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\features\FeatureFamily.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\features\FeatureImpl.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\protocols\Exchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\protocols\Protocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\protocols\ProtocolFamily.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\protocols\ProtocolHelper.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\protocols\ProtocolHint.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\protocols\Transaction.cpp"></File>
+			<File RelativePath="..\..\..\..\src\common\protocols\Transfer.cpp"></File>
+			<File RelativePath="..\..\..\..\src\native\network\Inet4Address.cpp"></File>
+			<File RelativePath="..\..\..\..\src\native\network\SocketException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\native\network\SocketTimeoutException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\native\network\UnknownHostException.cpp"></File>
+			<File RelativePath="..\..\..\..\src\native\network\windows\NativeSocketWindows.cpp"></File>
+			<File RelativePath="..\..\..\..\src\native\rs232\RS232.cpp"></File>
+			<File RelativePath="..\..\..\..\src\native\rs232\windows\NativeRS232Windows.c"></File>
+			<File RelativePath="..\..\..\..\src\native\system\System.cpp"></File>
+			<File RelativePath="..\..\..\..\src\native\system\windows\NativeSystemWindows.c"></File>
+			<File RelativePath="..\..\..\..\src\native\usb\USB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\native\usb\USBDiscovery.cpp"></File>
+			<File RelativePath="..\..\..\..\src\native\usb\winusb\NativeUSBWinUSB.c"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\network\BlazeTCPIPv4.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\network\JazTCPIPv4.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\rs232\OOIRS232Interface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\ApexUSB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\BlazeUSB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\BlazeUSBTransferHelper.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\FlameNIRUSB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\HR2000PlusUSB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\HR2000USB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\HR4000USB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\JazUSB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\Maya2000ProUSB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\Maya2000USB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\MayaLSLUSB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\NIRQuest256USB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\NIRQuest512USB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\OOIUSB4KSpectrumTransferHelper.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\OOIUSBControlTransferHelper.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\OOIUSBEndpointMaps.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\OOIUSBInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\OOIUSBSpectrumTransferHelper.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\OOIUSBTrivialTransferHelper.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\QE65000USB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\QEProUSB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\STSUSB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\SparkUSB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\TorusUSB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\USB2000PlusUSB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\USB2000USB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\USB4000USB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\buses\usb\VentanaUSB.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\Apex.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\Blaze.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\FlameNIR.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\HR2000.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\HR2000Plus.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\HR4000.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\Jaz.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\Maya2000.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\Maya2000Pro.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\MayaLSL.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\NIRQuest256.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\NIRQuest512.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\QE65000.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\QEPro.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\STS.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\Spark.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\Torus.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\USB2000.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\USB2000Plus.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\USB4000.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\devices\Ventana.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\acquisition_delay\AcquisitionDelayFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\acquisition_delay\AcquisitionDelayFeature_FPGA.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\acquisition_delay\STSAcquisitionDelayFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\continuous_strobe\ContinuousStrobeFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\continuous_strobe\ContinuousStrobeFeature_FPGA.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\data_buffer\DataBufferFeatureBase.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\data_buffer\QEProDataBufferFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\EEPROMSlotFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\EEPROMSlotFeatureBase.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\NonlinearityEEPROMSlotFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeatureBase.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeature_MayaPro.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\SaturationEEPROMSlotFeature_NIRQuest.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\SerialNumberEEPROMSlotFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\StrayLightEEPROMSlotFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\WavelengthEEPROMSlotFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\eeprom_slots\WavelengthEEPROMSlotFeature_QE65000.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\fpga_register\FPGARegisterFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\irradcal\IrradCalFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\light_source\LightSourceFeatureBase.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\light_source\LightSourceFeatureImpl.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\light_source\StrobeLampFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\light_source\VentanaLightSourceFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\nonlinearity\NonlinearityCoeffsFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\optical_bench\OpticalBenchFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\pixel_binning\PixelBinningFeatureInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\pixel_binning\STSPixelBinningFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\raw_bus_access\RawUSBBusAccessFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\revision\RevisionFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\serial_number\SerialNumberFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\shutter\ShutterFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\ApexSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\BlazeSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\FlameNIRSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\GainAdjustedSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\HR2000PlusSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\HR2000SpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\HR4000SpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\JazSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\Maya2000ProSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\Maya2000SpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\MayaLSLSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\NIRQuest256SpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\NIRQuest512SpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\NIRQuestSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\OOISpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeatureBase.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\ProgrammableSaturationFeatureImpl.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\QE65000SpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\QEProSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\STSSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\SparkSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\SpectrometerTriggerMode.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\USB2000PlusSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\USB2000SpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\USB4000SpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrometer\VentanaSpectrometerFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\spectrum_processing\SpectrumProcessingFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\stray_light\StrayLightCoeffsFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\temperature\TemperatureFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\thermoelectric\QEProThermoElectricFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\thermoelectric\ThermoElectricFeatureBase.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\thermoelectric\ThermoElectricQEFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\thermoelectric\VentanaThermoElectricFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\features\wavecal\WaveCalFeature.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\AcquisitionDelayProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\ContinuousStrobeProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\DataBufferProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\EEPROMProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\FPGARegisterProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\IrradCalProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\LightSourceProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\NonlinearityCoeffsProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\OpticalBenchProtocolInteface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\PixelBinningProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\ProgrammableSaturationProtocolInteface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\RevisionProtocolInteface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\SerialNumberProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\ShutterProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\SpectrometerProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\SpectrumProcessingProtocolInteface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\StrayLightCoeffsProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\StrobeLampProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\TemperatureProtocolInteface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\ThermoElectricProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\interfaces\WaveCalProtocolInterface.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPCommand.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPContinuousStrobeEnableExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPContinuousStrobePeriodExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPDataBufferClearExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetAllTemperaturesExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetBoxcarWidthExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDataBufferCapacityExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDataBufferCountExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDataBufferMaximumCapacityExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetDefaultPixelBinningExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetFirmwareRevisionExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetHardwareRevisionExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetIrradCalExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetIrradCollectionAreaExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetMaxPixelBinningExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetNonlinearityCoeffExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetNonlinearityCoeffsCountExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchCoatingExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchFiberDiameterMicronsExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchFilterExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchGratingExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchIDExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchSerialNumberExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetOpticalBenchSlitWidthMicronsExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetPixelBinningExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetSaturationExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetScansToAverageExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetSerialNumberExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetSerialNumberMaximumLengthExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetStrayLightCoeffExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetStrayLightCoeffsCountExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetTemperatureCountExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetTemperatureExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetThermoElectricTemperatureExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPGetWaveCalExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPIntegrationTimeExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPLampEnableCommand.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceEnableCommand.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceEnabledQuery.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceIntensityCommand.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPLightSourceIntensityQuery.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPMessage.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPQuery.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPReadRawSpectrum32AndMetadataExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPReadRawSpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPReadSpectrum32AndMetadataExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPReadSpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPReadSpectrumWithGainExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPRequestBufferedSpectrum32AndMetadata.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPRequestRawSpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPRequestSpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetAcquisitionDelayExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetBoxcarWidthExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetDataBufferCapacityExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetDefaultPixelBinningFactorExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetIrradCalExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetIrradCollectionAreaExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetPixelBinningExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetScansToAverageExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetThermoElectricEnableExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPSetThermoElectricSetpointExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPShutterExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPTransaction.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\exchanges\OBPTriggerModeExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\hints\OBPControlHint.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\hints\OBPSpectrumHint.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPAcquisitionDelayProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPContinuousStrobeProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPDataBufferProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPIrradCalProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPLightSourceProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPLightSourceProtocol_Ventana.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPNonlinearityCoeffsProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPOpticalBenchProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPPixelBinningProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPProgrammableSaturationProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPRevisionProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPSerialNumberProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPShutterProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPSpectrometerProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPSpectrumProcessingProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPStrayLightCoeffsProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPStrobeLampProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPTemperatureProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPThermoElectricProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OBPWaveCalProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\obp\impls\OceanBinaryProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\constants\FPGARegisterCodes.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\constants\OpCodes.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\FPGARegisterReadExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\FPGARegisterWriteExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\FPGASpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\FlameNIRSpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\HRFPGASpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\IntegrationTimeExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\JazSpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\MayaProSpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\NIRQuestSpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\OOI2KSpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\OOIIrradCalExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\OOIReadIrradCalExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\OOIWriteIrradCalExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\QESpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\ReadEEPROMSlotExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\ReadSpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\ReadTECQETemperatureExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\ReadTECTemperatureExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\RequestSpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\StrobeEnableExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\TECEnableExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\TECQEEnableExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\TriggerModeExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\USBFPGASpectrumExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\WriteEEPROMSlotExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\WriteTECQESetPointExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\exchanges\WriteTECSetPointExchange.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\hints\ControlHint.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\hints\SpectrumHint.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\FPGARegisterProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\OOIEEPROMProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\OOIIrradCalProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\OOIProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\OOISpectrometerProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\OOIStrobeLampProtocol.cpp"></File>
+			<File RelativePath="..\..\..\..\src\vendors\OceanOptics\protocols\ooi\impls\OOITECProtocol.cpp"></File>
+            <!-- SOURCES END HERE -->
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

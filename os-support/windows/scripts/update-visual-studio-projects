@@ -1,0 +1,247 @@
+#!/usr/bin/env perl
+################################################################################
+#                        update-visual-studio-projects                         #
+################################################################################
+#                                                                              #
+#  Description:     Automatically regenerates the list of include and source   #
+#                   files in Visual Studio projects, so we don't have to do    #
+#                   this manually.                                             #
+#                                                                              #
+#  Author:          Mark Zieg <mark.zieg@oceanoptics.com>                      #
+#                                                                              #
+#  Invocation:      $ ./update-visual-studio-projects (from any directory)     #
+#                                                                              #
+#  To-Do:           * add updates for Setup32, Setup64, and SetupWiX projects  #
+#                   * consider moving to XML/DOM                               #
+#                   * note we're editing XML charsets in ASCII                 #
+#                                                                              #
+################################################################################
+
+use strict;
+use warnings;
+
+main();
+
+sub main
+{
+    # this is where this script is located
+    my ($scriptDir) = ($0 =~ /(.*)\/[^\/]+$/);
+
+    # infer SeaBreeze root from script path
+    my $SeaBreezeDir = `cd $scriptDir/../../.. && echo \$PWD`;
+    chomp $SeaBreezeDir;
+    printf("Using SeaBreezeDir = $SeaBreezeDir (scriptDir = $scriptDir)\n");
+
+    # find current includes and sources
+    my $includes = readFiles($SeaBreezeDir, "include");
+    my $sources  = readFiles($SeaBreezeDir, "src");
+
+    # update Visual Studio projects
+    updateProj(
+        PATHNAME         => "$SeaBreezeDir/os-support/windows/VisualStudio2005/VSProj/SeaBreeze.vcproj",
+        INCLUDES         => $includes, 
+        SOURCES          => $sources, 
+        INCLUDE_TEMPLATE => "\t\t\t<File RelativePath=\"..\\..\\..\\..\\FILE_GOES_HERE\"></File>",
+        SOURCE_TEMPLATE  => "\t\t\t<File RelativePath=\"..\\..\\..\\..\\FILE_GOES_HERE\"></File>",
+    );
+
+    updateProj(
+        PATHNAME         => "$SeaBreezeDir/os-support/windows/VisualStudio2010/VSProj/SeaBreeze.vcxproj",
+        INCLUDES         => $includes, 
+        SOURCES          => $sources, 
+        INCLUDE_TEMPLATE => "    <ClInclude Include=\"..\\..\\..\\..\\FILE_GOES_HERE\" />",
+        SOURCE_TEMPLATE  => "    <ClCompile Include=\"..\\..\\..\\..\\FILE_GOES_HERE\" />",
+    );
+
+    updateProj(
+        PATHNAME         => "$SeaBreezeDir/os-support/windows/VisualStudio2010/VSProj/SeaBreeze.vcxproj.filters",
+        INCLUDES         => $includes, 
+        SOURCES          => $sources, 
+        INCLUDE_TEMPLATE => "    <ClInclude Include=\"..\\..\\..\\..\\FILE_GOES_HERE\"><Filter>Headers</Filter></ClInclude>",
+        SOURCE_TEMPLATE  => "    <ClCompile Include=\"..\\..\\..\\..\\FILE_GOES_HERE\"><Filter>Sources</Filter></ClCompile>",
+    );
+
+    updateProj(
+        PATHNAME         => "$SeaBreezeDir/os-support/windows/VisualStudio2012/VSProj/SeaBreeze.vcxproj",
+        INCLUDES         => $includes, 
+        SOURCES          => $sources, 
+        INCLUDE_TEMPLATE => "    <ClInclude Include=\"..\\..\\..\\..\\FILE_GOES_HERE\" />",
+        SOURCE_TEMPLATE  => "    <ClCompile Include=\"..\\..\\..\\..\\FILE_GOES_HERE\" />",
+    );
+
+    updateProj(
+        PATHNAME         => "$SeaBreezeDir/os-support/windows/VisualStudio2013/VSProj/SeaBreeze.vcxproj",
+        INCLUDES         => $includes, 
+        SOURCES          => $sources, 
+        INCLUDE_TEMPLATE => "    <ClInclude Include=\"..\\..\\..\\..\\FILE_GOES_HERE\" />",
+        SOURCE_TEMPLATE  => "    <ClCompile Include=\"..\\..\\..\\..\\FILE_GOES_HERE\" />",
+    );
+
+    updateProj(
+        PATHNAME         => "$SeaBreezeDir/os-support/windows/VisualStudio2013/VSProj/SeaBreeze.vcxproj.filters",
+        INCLUDES         => $includes, 
+        SOURCES          => $sources, 
+        INCLUDE_TEMPLATE => "    <ClInclude Include=\"..\\..\\..\\..\\FILE_GOES_HERE\"><Filter>Headers</Filter></ClInclude>",
+        SOURCE_TEMPLATE  => "    <ClCompile Include=\"..\\..\\..\\..\\FILE_GOES_HERE\"><Filter>Sources</Filter></ClCompile>",
+    );
+
+    fixSetupPaths(
+        PATHNAME => "$SeaBreezeDir/os-support/windows/VisualStudio2010/SetUp32/SetUp32.vdproj",
+        OLD      => "\\\\\\\\vmware-host\\\\Shared Folders\\\\work\\\\gforge\\\\seabreeze\\\\SeaBreeze",
+        NEW      => "..\\\\..\\\\..\\\\.."
+    );
+
+    fixSetupPaths(
+        PATHNAME => "$SeaBreezeDir/os-support/windows/VisualStudio2010/SetUp64/SetUp64.vdproj",
+        OLD      => "\\\\\\\\vmware-host\\\\Shared Folders\\\\work\\\\gforge\\\\seabreeze\\\\SeaBreeze",
+        NEW      => "..\\\\..\\\\..\\\\.."
+    );
+	
+    fixSetupPaths(
+        PATHNAME => "$SeaBreezeDir/os-support/windows/VisualStudio2013/SetUp32/SetUp32.vdproj",
+        OLD      => "\\\\\\\\vmware-host\\\\Shared Folders\\\\work\\\\gforge\\\\seabreeze\\\\SeaBreeze",
+        NEW      => "..\\\\..\\\\..\\\\.."
+    );
+
+    fixSetupPaths(
+        PATHNAME => "$SeaBreezeDir/os-support/windows/VisualStudio2013/SetUp64/SetUp64.vdproj",
+        OLD      => "\\\\\\\\vmware-host\\\\Shared Folders\\\\work\\\\gforge\\\\seabreeze\\\\SeaBreeze",
+        NEW      => "..\\\\..\\\\..\\\\.."
+    );
+}
+
+sub readFiles
+{
+    my $root = shift;
+    my $subdir = shift;
+
+    print "Scanning for files in $root/$subdir...\n";
+    my @unixfiles = `cd $root && find $subdir -type f | sort`;
+
+    my @dosfiles;
+    foreach my $file (@unixfiles)
+    {
+        $file =~ s/\s*$//g;
+        $file =~ s/\//\\/g;     # change unix slashes to DOS
+
+        next unless $file =~ /\.(h|c|cpp)$/;
+        if ($file =~ /Linux|MacOS|POSIX/)
+        {
+            print "  skipping: $file\n";
+            next;
+        }
+
+        push @dosfiles, $file;
+    }
+
+    printf("  %d files found\n", scalar @dosfiles);
+
+    return \@dosfiles;
+}
+
+sub updateProj
+{
+    my %opts = @_;
+
+    # read current file
+    my $orig = readFile($opts{PATHNAME});
+    my @new;
+
+    # translate old to new
+    my $state = "LOOKING_FOR_START";
+    foreach my $line (@$orig)
+    {
+        if ("LOOKING_FOR_START" eq $state)
+        {
+            push @new, $line;
+            if ($line =~ /^\s*<!-- INCLUDES START HERE -->\s*$/)
+            {
+                $state = "LOOKING_FOR_INCLUDE_END";
+            }
+            elsif ($line =~ /^\s*<!-- SOURCES START HERE -->\s*$/)
+            {
+                $state = "LOOKING_FOR_SOURCE_END";
+            }
+        }
+        elsif ("LOOKING_FOR_INCLUDE_END" eq $state)
+        {
+            if ($line =~ /^\s*<!-- INCLUDES END HERE -->\s*$/)
+            {
+                foreach my $file (@{$opts{INCLUDES}})
+                {
+                    my $template = $opts{INCLUDE_TEMPLATE};
+                    $template =~ s/FILE_GOES_HERE/$file/gs;
+                    push @new, $template;
+                }
+                push @new, $line;
+                $state = "LOOKING_FOR_START";
+            }
+        }
+        elsif ("LOOKING_FOR_SOURCE_END" eq $state)
+        {
+            if ($line =~ /^\s*<!-- SOURCES END HERE -->\s*$/)
+            {
+                foreach my $file (@{$opts{SOURCES}})
+                {
+                    my $template = $opts{SOURCE_TEMPLATE};
+                    $template =~ s/FILE_GOES_HERE/$file/gs;
+                    push @new, $template;
+                }
+                push @new, $line;
+                $state = "LOOKING_FOR_START";
+            }
+        }
+    }
+
+    saveWithBackup(
+        PATHNAME => $opts{PATHNAME},
+        LINES => \@new
+    );
+}
+
+sub readFile
+{
+    my $pathname = shift;
+    my @lines;
+    open(INFILE, $pathname) || die "Can't open $pathname: $!";
+    while(my $line = <INFILE>)
+    {
+        $line =~ s/\s*$//;
+        push @lines, $line;
+    }
+    close(INFILE);
+    return \@lines;
+}
+
+sub fixSetupPaths
+{
+    my %opts = @_;
+
+    my $orig = readFile($opts{PATHNAME});
+
+    my @new;
+    foreach my $line (@$orig)
+    {
+        $line =~ s/\Q$opts{OLD}\E/$opts{NEW}/; 
+        push @new, $line;
+    }
+
+    saveWithBackup(
+        PATHNAME => $opts{PATHNAME},
+        LINES => \@new
+    );
+}
+
+sub saveWithBackup
+{
+    my %opts = @_;
+
+    `mv $opts{PATHNAME} $opts{PATHNAME}.bak`;
+    open(OUTFILE, ">$opts{PATHNAME}") || die "Can't write $opts{PATHNAME}: $!";
+    foreach my $line (@{$opts{LINES}})
+    {
+        print OUTFILE $line . "\r\n";
+    }
+    close(OUTFILE);
+    print "updated $opts{PATHNAME}\n";
+}

@@ -1,0 +1,1824 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1344\cocoasubrtf720
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red46\green111\blue253;\red0\green68\blue254;\red164\green8\blue0;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww15700\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 \
+
+\b HeliospectraSTSdaemonGUI
+\b0 \
+Kirk Clendinning 201502015\
+\
+The SeaBreeze API provides a generic interface by which to control Ocean Optics spectrometers from a Windows, OS X or Linux based operating system. The entire API is available, open source, via SourceForge. The code may be modified, as needed, for custom applications. Developers are encouraged to extend the functionality of the API and by contacting Ocean Optics, contribute to the scientific community by donating new features. \
+\
+SeaBreeze was written as a generic interface for Ocean Optics\'92 diverse offering of spectrometers. In fact, SeaBreeze was written in such a generic manner, that spectrometers from other manufacturers, could be added as well. The structure of the architecture is such that protocols, devices, features and buses are independent. So, if two spectrometers have similar feature sets, the high level interfaces can be leveraged to more quickly include a new device in SeaBreeze. Similarly, several buses and protocols utilized by Ocean Optics spectrometers are already included. \
+\
+This, of course, is a double edged sword. While the structure for easily adding new functionality already exists, in order to be applicable to a diverse set of instruments, there is a certain amount of what could be viewed as necessary overhead, common practice or programming style convention required. Although not difficult to understand, the list of changes to be made for a successful feature addition is somewhat extensive. So, a checklist of sorts was deemed useful.\
+\
+In the \ul Ocean Optics STS Data Sheet\ulnone , in the 
+\i STS USB/RS-232 Port Interface Communications and Control Information
+\i0  section, it states, \'93Only experienced USB programmers should attempt to interface to the STS via these methods.\'94 Using SeaBreeze, programmers with an object oriented background, but no USB experience, can write code to control the STS, or for that matter, any of the Ocean Optics spectrometers, and that\'92s the beauty of it!\
+\
+The following is list of the changes required to add a USB command for 
+\i Boxcar Filter Width
+\i0  and 
+\i Scans to Average
+\i0  to the Ocean Optics STS spectrometer feature set. Although it may appear to be a significant amount of work, it is not, most everything is cut, paste and replace. Simple features such accessing the spectrum processing of the STS can be added in an afternoon, frankly, about the same amount of time that it took to write this document.\
+\
+
+\b 1. Begin work in 
+\i SeaBreeze/src/api/seabreezeapi/
+\i0  and S
+\i eaBreeze/include/api/seabreezeapi/
+\i0 . A new FeatureFamily is required to contain the new functionality. This was called the 
+\i SpectrumProcessingFeatureFamily
+\i0 .  In the file FeatureFamilies.cpp, a family ID was defined.
+\b0 \
+\
+	#define FEATURE_FAMILY_ID_SPECTRUM_PROCESSING   17\
+\
+
+\b A constructor and destructor are defined for the new family.
+\b0 \
+\
+\cf2 	seabreeze::api::SpectrumProcessingFeatureFamily::SpectrumProcessingFeatureFamily()\
+	        : FeatureFamily("SpectrumProcessing", FEATURE_FAMILY_ID_SPECTRUM_PROCESSING) \
+	\{\
+	\}\
+\
+	seabreeze::api::SpectrumProcessingFeatureFamily::~SpectrumProcessingFeatureFamily() \
+	\{\
+	\}\cf0 \
+\
+
+\b A vector of family features can be retrieved. The new SpectrumProcessingFeatureFamily is added to that method.
+\b0 \
+\
+	vector<FeatureFamily *> seabreeze::api::FeatureFamilies::getAllFeatureFamilies()\
+	 \{\
+	    vector<FeatureFamily *> retval;\
+ 	   /* This creates new instances of these so the class-wide fields do not risk\
+ 	    * having their const flags ignored.\
+	     */\
+	    retval.push_back(new SerialNumberFeatureFamily());\
+	    retval.push_back(new SpectrometerFeatureFamily());\
+	    retval.push_back(new ThermoElectricFeatureFamily());\
+ 	    retval.push_back(new IrradCalFeatureFamily());\
+	    retval.push_back(new EEPROMFeatureFamily());\
+	    retval.push_back(new StrobeLampFeatureFamily());\
+	    retval.push_back(new ContinuousStrobeFeatureFamily());\
+	    retval.push_back(new ShutterFeatureFamily());\
+	    retval.push_back(new WaveCalCoeffsEEPromFeatureFamily());\
+	    retval.push_back(new NonlinearityCoeffsFeatureFamily());\
+	    retval.push_back(new StrayLightCoeffsFeatureFamily());\
+	    retval.push_back(new RawUSBBusAccessFeatureFamily());\
+ 	    retval.push_back(new LightSourceFeatureFamily());\
+	    retval.push_back(new TemperatureFeatureFamily());\
+ 	    retval.push_back(new OpticalBenchFeatureFamily());\
+
+\i    \cf2  	   retval.push_back(new SpectrumProcessingFeatureFamily());
+\i0 \cf0 \
+	\
+	   return retval;\
+	\}\
+\
+
+\b 2. The new Feature Family is added to the FeatureFamilies.h file as a class in the SeaBreeze, api namespace.\
+
+\b0 \
+\
+        class SpectrumProcessingFeatureFamily : public FeatureFamily \{\
+        public:\
+            SpectrumProcessingFeatureFamily();\
+            virtual ~SpectrumProcessingFeatureFamily();\
+        \};\
+\
+        class FeatureFamilies \
+	\{\
+        public:\
+            const UndefinedFeatureFamily UNDEFINED;\
+            const SerialNumberFeatureFamily SERIAL_NUMBER;\
+            const SpectrometerFeatureFamily SPECTROMETER;\
+            const ThermoElectricFeatureFamily THERMOELECTRIC;\
+            const IrradCalFeatureFamily IRRAD_CAL;\
+            const EEPROMFeatureFamily EEPROM;\
+            const LightSourceFeatureFamily LIGHT_SOURCE;\
+            const StrobeLampFeatureFamily STROBE_LAMP_ENABLE;\
+            const ContinuousStrobeFeatureFamily CONTINUOUS_STROBE;\
+            const ShutterFeatureFamily SHUTTER;\
+            const WaveCalCoeffsEEPromFeatureFamily WAVELENGTH_CAL;\
+            const NonlinearityCoeffsFeatureFamily NONLINEARITY_COEFFS;\
+            const TemperatureFeatureFamily TEMPERATURE;\
+            const RevisionFeatureFamily REVISION;\
+            const OpticalBenchFeatureFamily OPTICAL_BENCH;\
+\cf3             const SpectrumProcessingFeatureFamily SPECTRUM_PROCESSING;\
+\cf0             const StrayLightCoeffsFeatureFamily STRAY_LIGHT_COEFFS;\
+            const RawUSBBusAccessFeatureFamily RAW_USB_BUS_ACCESS;\
+\
+            FeatureFamilies();\
+            ~FeatureFamilies();\
+            std::vector<FeatureFamily *> getAllFeatureFamilies();\
+        \};\
+\
+\
+
+\b 3. A SpectrumProcessingFeatureAdapter file is added, called SpectrumProcessingFeatureAdapter.cpp. Pay special attention to coding conventions. Due to the extensive namespaces, consistently naming is important. The file is included in its entirety here. In this case methods for reading and writing the 
+\i boxcar filter width
+\i0  and 
+\i scans to average
+\i0  were defined. Keep consistent naming conventions for methods as well as exception handling and coding style. Duplicate as much as possible, only adding functionality where necessary. Note here that the data types for the boxcarWidth and scansToAverage were defined by the STS Data Sheet USB protocol. \
+\
+\cf4 In some implementations, those which required memory to be allocated in lower levels, pointers to buffers are passed from the calling methods of FeatureAdapter methods, so that the memory can be freed at the Feature Adapter level. That helps prevent memory leaks by adding orthogonality to the coding convention.\cf0  Since the boxcar filter width and scans to average features were so limited in memory requirements, this technique was noted, but not employed. Please refer to the readOpticalBenchID() function in the OpticalBenchFeatureAdapter.cpp file, for an example of freeing memory where a string is allocated to contain data read from the spectrometer.\
+\
+Be sure to remember the header file reference. Missing that will cause an unruly, difficult to diagnose, number of compiler errors.\
+\
+\
+\cf4 Please Note: Although code can be authored, Ocean Optics retains the licensing rights, since any added functionality is based on the SeaBreeze software license.
+\b0 \cf0 \
+\
+\
+
+\b \cf3 Also make note of the way comments are done. This is important for consistency in the doxygen implementation for automatically generated documentation.\cf0  
+\b0 \
+\
+/***************************************************//**\
+ * @file    SpectrumProcessingFeatureAdapter.cpp\
+ * @date    February 2015\
+ * @author  Ocean Optics, Inc., Kirk Clendinning, Heliospectra\
+ *\
+ * This is a wrapper that allows access to SeaBreeze\
+ * SpectrumProcessingFeatureInterface instances.\
+ *\
+ * LICENSE:\
+ *\
+ * SeaBreeze Copyright (C) 2015, Ocean Optics Inc\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining\
+ * a copy of this software and associated documentation files (the\
+ * "Software"), to deal in the Software without restriction, including\
+ * without limitation the rights to use, copy, modify, merge, publish,\
+ * distribute, sublicense, and/or sell copies of the Software, and to\
+ * permit persons to whom the Software is furnished to do so, subject\
+ * to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included\
+ * in all copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,\
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\
+ *******************************************************/\
+\
+/* Macros and constants */\
+#define SET_ERROR_CODE(code) do \{ if(NULL != errorCode) \{ *errorCode = code; \}  \} while(0)\
+\
+#include "common/globals.h"\
+#include "api/seabreezeapi/SeaBreezeAPIConstants.h"\
+\cf3 #include "api/seabreezeapi/SpectrumProcessingFeatureAdapter.h"    //  <==========================\cf0 \
+#include <string.h> /* for memcpy */\
+#include <vector>\
+\
+using namespace seabreeze;\
+using namespace seabreeze::api;\
+using namespace std;\
+\
+SpectrumProcessingFeatureAdapter::SpectrumProcessingFeatureAdapter(\
+        SpectrumProcessingFeatureInterface *intf, const FeatureFamily &f,\
+                    Protocol *p, Bus *b, unsigned short instanceIndex)\
+        : FeatureAdapterTemplate<SpectrumProcessingFeatureInterface>(intf, f, p, b, instanceIndex) \{\
+\
+    /* Nothing else to do here, the initialization list takes care of it */\
+\}\
+\
+SpectrumProcessingFeatureAdapter::~SpectrumProcessingFeatureAdapter() \{\
+    /* This is just a wrapper around existing instances -- nothing to delete */\
+\}\
+\
+#ifdef _WINDOWS\
+#pragma warning (disable: 4101) // unreferenced local variable\
+#endif\
+\
+\
+unsigned char SpectrumProcessingFeatureAdapter::readSpectrumProcessingBoxcarWidth(int *errorCode) \{\
+	unsigned char returnValue;\
+	\
+	// no memory allocated, just pass it through\
+	try \{\
+    	returnValue=this->feature->readSpectrumProcessingBoxcarWidth(*this->protocol, *this->bus);\
+    	SET_ERROR_CODE(ERROR_SUCCESS);\
+    \}\
+    catch (FeatureException &fe) \{\
+    	returnValue=-1; \
+    	SET_ERROR_CODE(ERROR_TRANSFER_ERROR);\
+    \}\
+    return returnValue;\
+\}\
+\
+\
+unsigned short int SpectrumProcessingFeatureAdapter::readSpectrumProcessingScansToAverage(int *errorCode) \{\
+	unsigned short int returnValue;\
+	\
+	// no memory allocated, just pass it through\
+	try \{\
+    	returnValue=this->feature->readSpectrumProcessingScansToAverage(*this->protocol, *this->bus);\
+    	SET_ERROR_CODE(ERROR_SUCCESS);\
+    \}\
+    catch (FeatureException &fe) \{\
+    	returnValue=-1; // clearly an error value\
+    	SET_ERROR_CODE(ERROR_TRANSFER_ERROR);\
+    \}\
+    return returnValue;\
+\}\
+\
+void SpectrumProcessingFeatureAdapter::writeSpectrumProcessingScansToAverage(int *errorCode, unsigned short int scansToAverage) \{\
+\
+    try \{\
+        this->feature->writeSpectrumProcessingScansToAverage(*this->protocol, *this->bus, scansToAverage);\
+        SET_ERROR_CODE(ERROR_SUCCESS);\
+    \} catch (FeatureException &fe) \{\
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);\
+        return;\
+    \}\
+\
+    return;\
+\}\
+\
+void SpectrumProcessingFeatureAdapter::writeSpectrumProcessingBoxcarWidth(int *errorCode, unsigned char boxcarWidth) \{\
+\
+    try \{\
+        this->feature->writeSpectrumProcessingBoxcarWidth(*this->protocol, *this->bus, boxcarWidth);\
+        SET_ERROR_CODE(ERROR_SUCCESS);\
+    \} catch (FeatureException &fe) \{\
+        SET_ERROR_CODE(ERROR_TRANSFER_ERROR);\
+        return;\
+    \}\
+\
+    return;\
+\}\
+\
+\
+
+\b 4. Likewise, a Feature Adapter header file should be created called, 
+\i SpectrumProcessingFeatureAdapter.h
+\i0 . It is included in its entity. Note the definitions for assuring correct header inclusion. This includes the name of the file.\
+
+\b0 \
+/***************************************************//**\
+ * @file    SpectrumProcessingFeatureAdapter.h\
+ * @date    January 2015\
+ * @author  Ocean Optics, Inc., Kirk Clendinning, Heliospectra\
+ *\
+ * This is a wrapper that allows\
+ * access to SeaBreeze SpectrumProcessingFeatureInterface instances.\
+ *\
+ * LICENSE:\
+ *\
+ * SeaBreeze Copyright (C) 2015, Ocean Optics Inc\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining\
+ * a copy of this software and associated documentation files (the\
+ * "Software"), to deal in the Software without restriction, including\
+ * without limitation the rights to use, copy, modify, merge, publish,\
+ * distribute, sublicense, and/or sell copies of the Software, and to\
+ * permit persons to whom the Software is furnished to do so, subject\
+ * to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included\
+ * in all copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,\
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\
+ *******************************************************/\
+\
+\cf3 #ifndef SEABREEZE_SPECTRUMPROCESSINGFEATUREADAPTER_H\
+#define SEABREEZE_SPECTRUMPROCESSINGFEATUREADAPTER_H\cf0 \
+\
+#include "api/seabreezeapi/FeatureAdapterTemplate.h"\
+\cf3 #include "vendors/OceanOptics/features/spectrum_processing/SpectrumProcessingFeatureInterface.h"\cf0 \
+\
+namespace seabreeze \{\
+    namespace api \{\
+\
+        class SpectrumProcessingFeatureAdapter\
+                : public FeatureAdapterTemplate<SpectrumProcessingFeatureInterface> \{\
+        public:\
+            SpectrumProcessingFeatureAdapter(SpectrumProcessingFeatureInterface *intf,\
+                    const FeatureFamily &f,\
+                    Protocol *p, Bus *b, unsigned short instanceIndex);\
+            virtual ~SpectrumProcessingFeatureAdapter();\
+\
+	    unsigned char readSpectrumProcessingBoxcarWidth(int *errorCode);\
+            unsigned short int readSpectrumProcessingScansToAverage(int *errorCode);\
+            void writeSpectrumProcessingBoxcarWidth(int *errorCode, unsigned char boxcarWidth);\
+            void writeSpectrumProcessingScansToAverage(int *errorCode, unsigned short int scansToAverage);\
+\
+        \};\
+\
+    \}\
+\}\
+\
+#endif\
+\
+
+\b 5. The DeviceAdapter.cpp file is an extremely important interface for new functionality. There are several well hidden changes that are needed to this file. First, in the destructor, a line should be added. It is accented in blue for clarity.
+\b0 \
+\
+DeviceAdapter::~DeviceAdapter() \{\
+    __delete_feature_adapters<SerialNumberFeatureAdapter>(serialNumberFeatures);\
+    __delete_feature_adapters<SpectrometerFeatureAdapter>(spectrometerFeatures);\
+    __delete_feature_adapters<ThermoElectricCoolerFeatureAdapter>(tecFeatures);\
+    __delete_feature_adapters<IrradCalFeatureAdapter>(irradCalFeatures);\
+    __delete_feature_adapters<EEPROMFeatureAdapter>(eepromFeatures);\
+    __delete_feature_adapters<StrobeLampFeatureAdapter>(strobeLampFeatures);\
+    __delete_feature_adapters<ContinuousStrobeFeatureAdapter>(continuousStrobeFeatures);\
+    __delete_feature_adapters<ShutterFeatureAdapter>(shutterFeatures);\
+    __delete_feature_adapters<NonlinearityCoeffsFeatureAdapter>(nonlinearityFeatures);\
+    __delete_feature_adapters<TemperatureFeatureAdapter>(temperatureFeatures);\
+    __delete_feature_adapters<RevisionFeatureAdapter>(revisionFeatures);\
+    __delete_feature_adapters<OpticalBenchFeatureAdapter>(opticalBenchFeatures);\
+\cf3     __delete_feature_adapters<SpectrumProcessingFeatureAdapter>(spectrumProcessingFeatures);\
+\cf0     __delete_feature_adapters<StrayLightCoeffsFeatureAdapter>(strayLightFeatures);\
+    __delete_feature_adapters<LightSourceFeatureAdapter>(lightSourceFeatures);\
+\
+    delete this->device;\
+\}\
+\
+
+\b In 
+\i int DeviceAdapter::open(int *errorCode)
+\i0 , feature adapters are created, which gives each device object a chance to probe hardware for features; a __create_feature_adapters template is provided for producing feature lists.\
+
+\b0 \
+     /* Create spectrum processing feature list */\
+    __create_feature_adapters<SpectrumProcessingFeatureInterface,\
+                    SpectrumProcessingFeatureAdapter>(this->device,\
+            spectrumProcessingFeatures, bus, featureFamilies.SPECTRUM_PROCESSING);\
+                       \
+
+\b A set of feature wrappers should be defined. Note that there are several required methods for consistent interface with the device adapter strategy defined by the SeaBreeze architecture; getNumberOfSpectrumProcessingFeatures(), getSpectrumProcessingFeatures(long *buffer, int maxFeatures) and getSpectrumProcessingFeatureByID(long spectrumProcessingFeatureID). Also note that the names of the methods begin with the feature family, 
+\i spectrumProcessing
+\i0 , continue with the name of the method, 
+\i ScansToAverage
+\i0 , and finally the action to take, 
+\i Get
+\i0 . Adhering to this convention will prevent naming problems in other files. In this file use 
+\i Get
+\i0  instead of 
+\i Read
+\i0  for data retrieval and 
+\i Set
+\i0  instead of 
+\i Write
+\i0 . \
+\
+Your new functions should be called something like, yourFeatureFamily_VariableName_Action((long spectrumProcessingFeatureID, int *errorCode), with the underscores, used for clarity, removed. \
+\
+Notice that this file is an interface into the actual feature, where a similarly named function, by convention, will be found: 
+\i readSpectrumProcessingScansToAverage
+\i0 (errorCode).\
+
+\b0 \
+
+\b Add a section in the DeviceAdapter.cpp file for your new features.\
+
+\b0 \
+/* Spectrum processing feature wrappers */\
+int DeviceAdapter::getNumberOfSpectrumProcessingFeatures() \
+\{\
+    return (int) this->spectrumProcessingFeatures.size();\
+\}\
+\
+int DeviceAdapter::getSpectrumProcessingFeatures(long *buffer, int maxFeatures) \
+\{\
+    return __getFeatureIDs<SpectrumProcessingFeatureAdapter>(\
+                spectrumProcessingFeatures, buffer, maxFeatures);\
+\}\
+\
+SpectrumProcessingFeatureAdapter *DeviceAdapter::getSpectrumProcessingFeatureByID(long spectrumProcessingFeatureID) \
+\{\
+    return __getFeatureByID<SpectrumProcessingFeatureAdapter>(\
+               spectrumProcessingFeatures, spectrumProcessingFeatureID);\
+\}\
+\
+unsigned short int DeviceAdapter::spectrumProcessingScansToAverageGet(long spectrumProcessingFeatureID, int *errorCode) \
+\{\
+    SpectrumProcessingFeatureAdapter *feature = getSpectrumProcessingFeatureByID(spectrumProcessingFeatureID);\
+    if(NULL == feature) \
+    \{\
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);\
+        return 0;\
+    \}\
+\
+    return feature->readSpectrumProcessingScansToAverage(errorCode);\
+\}\
+\
+unsigned char DeviceAdapter::spectrumProcessingBoxcarWidthGet(long spectrumProcessingFeatureID, int *errorCode) \
+\{\
+    SpectrumProcessingFeatureAdapter *feature = getSpectrumProcessingFeatureByID(spectrumProcessingFeatureID);\
+    if(NULL == feature) \
+    \{\
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);\
+        return 0;\
+    \}\
+\
+    return feature->readSpectrumProcessingBoxcarWidth(errorCode);\
+\}\
+\
+void DeviceAdapter::spectrumProcessingBoxcarWidthSet(long featureID, int *errorCode,\
+            unsigned char boxcarWidth)\
+ \{\
+\
+    SpectrumProcessingFeatureAdapter *feature = getSpectrumProcessingFeatureByID(featureID);\
+    if(NULL == feature) \
+    \{\
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);\
+        return;\
+    \}\
+\
+    feature->writeSpectrumProcessingBoxcarWidth(errorCode, boxcarWidth);\
+\}\
+\
+void DeviceAdapter::spectrumProcessingScansToAverageSet(long featureID, int *errorCode,\
+            unsigned short int scansToAverage) \
+\{\
+\
+    SpectrumProcessingFeatureAdapter *feature = getSpectrumProcessingFeatureByID(featureID);\
+    if(NULL == feature) \
+    \{\
+        SET_ERROR_CODE(ERROR_FEATURE_NOT_FOUND);\
+        return;\
+    \}\
+\
+    feature->writeSpectrumProcessingScansToAverage(errorCode, scansToAverage);\
+\}\
+\
+\
+
+\b 6. Corresponding changes to the DeviceAdapter.h file are needed.\
+\
+Remember to add the header reference.\
+
+\b0 \
+#include "api/seabreezeapi/SpectrumProcessingFeatureAdapter.h"\
+\
+
+\b Add the method declarations in the header file for the feature adapter in the DeviceAdapter class.\
+
+\b0 \
+            /* Get one or more spectrum processing features */\
+            int getNumberOfSpectrumProcessingFeatures();\
+            int getSpectrumProcessingFeatures(long *buffer, int maxFeatures);\
+            unsigned short int spectrumProcessingScansToAverageGet(long spectrumProcessingFeatureID, int *errorCode);\
+            unsigned char spectrumProcessingBoxcarWidthGet(long spectrumProcessingFeatureID, int *errorCode);\
+	    void spectrumProcessingBoxcarWidthSet(long featureID, int *errorCode, unsigned char boxcarWidth);\
+	    void spectrumProcessingScansToAverageSet(long featureID, int *errorCode, unsigned short int scansToAverage);\
+\
+
+\b Add a vector of features in the protected area of the DeviceAdapter class, along with the declaration of the get feature by ID method.\
+
+\b0 \
+            std::vector<SpectrumProcessingFeatureAdapter *> spectrumProcessingFeatures;\
+\
+            SpectrumProcessingFeatureAdapter *getSpectrumProcessingFeatureByID(long featureID);\
+\
+\
+
+\b 7. In the SeabreezeAPI.cpp file, it is important to closely follow coding conventions. Since this is the API interface, inconsistencies show up in the programming interface documentation. The same methods that were defined in the DeviceAdapter, should be revealed to the API. Note that the methods are referenced through the adapter, rather than the feature at this level. \
+\
+For instance, 
+\i return \cf3 adapter\cf0 ->getNumberOfSpectrumProcessingFeatures();
+\i0 \
+
+\b0 \
+\
+/**************************************************************************************/\
+//  Spectrum Processing Features for the SeaBreeze API class\
+/**************************************************************************************/\
+\
+int SeaBreezeAPI::getNumberOfSpectrumProcessingFeatures(long deviceID, int *errorCode) \
+\{\
+    DeviceAdapter *adapter = getDeviceByID(deviceID);\
+    if(NULL == adapter) \
+    \{\
+        SET_ERROR_CODE(ERROR_NO_DEVICE);\
+        return 0;\
+    \}\
+\
+    SET_ERROR_CODE(ERROR_SUCCESS);\
+    return adapter->getNumberOfSpectrumProcessingFeatures();\
+\}\
+\
+int SeaBreezeAPI::getSpectrumProcessingFeatures(long deviceID, int *errorCode,\
+        long *buffer, unsigned int maxLength) \
+\{\
+    DeviceAdapter *adapter = getDeviceByID(deviceID);\
+    if(NULL == adapter) \
+    \{\
+        SET_ERROR_CODE(ERROR_NO_DEVICE);\
+        return 0;\
+    \}\
+\
+    SET_ERROR_CODE(ERROR_SUCCESS);\
+    return adapter->getSpectrumProcessingFeatures(buffer, maxLength);\
+\}\
+\
+unsigned short int SeaBreezeAPI::spectrumProcessingScansToAverageGet(long deviceID, long spectrumProcessingFeatureID, int *errorCode) \
+\{\
+    DeviceAdapter *adapter = getDeviceByID(deviceID);\
+    if(NULL == adapter) \
+    \{\
+        SET_ERROR_CODE(ERROR_NO_DEVICE);\
+        return 0;\
+    \}\
+\
+    return adapter->spectrumProcessingScansToAverageGet(spectrumProcessingFeatureID, errorCode);\
+\}\
+\
+unsigned char SeaBreezeAPI::spectrumProcessingBoxcarWidthGet(long deviceID, long spectrumProcessingFeatureID, int *errorCode) \
+\{\
+    DeviceAdapter *adapter = getDeviceByID(deviceID);\
+    if(NULL == adapter) \
+    \{\
+        SET_ERROR_CODE(ERROR_NO_DEVICE);\
+        return 0;\
+    \}\
+\
+    return adapter->spectrumProcessingBoxcarWidthGet(spectrumProcessingFeatureID, errorCode);\
+\}\
+\
+void SeaBreezeAPI::spectrumProcessingScansToAverageSet(long deviceID, long featureID,\
+        int *errorCode, unsigned short int scansToAverage) \
+\{\
+    DeviceAdapter *adapter = getDeviceByID(deviceID);\
+    if(NULL == adapter) \
+    \{\
+        SET_ERROR_CODE(ERROR_NO_DEVICE);\
+        return;\
+    \}\
+\
+    adapter->spectrumProcessingScansToAverageSet(featureID, errorCode,\
+            scansToAverage);\
+\}\
+\
+void SeaBreezeAPI::spectrumProcessingBoxcarWidthSet(long deviceID, long featureID,\
+        int *errorCode, unsigned char boxcarWidth) \
+\{\
+    DeviceAdapter *adapter = getDeviceByID(deviceID);\
+    if(NULL == adapter) \
+    \{\
+        SET_ERROR_CODE(ERROR_NO_DEVICE);\
+        return;\
+    \}\
+\
+    adapter->spectrumProcessingBoxcarWidthSet(featureID, errorCode,\
+            boxcarWidth);\
+\}\
+\
+\
+
+\b Since the SeaBreeze API supports both C++ and C, a C wrapper for the methods just defined in C++, must also be implemented. The naming convention is to preface with \'93sbapi_\'94 and separate each word with an underscore. The names should be identical to the C++ names, with the aforementioned modifications.\
+
+\b0 \
+/**************************************************************************************/\
+//  C language wrapper for spectrum processing features\
+/**************************************************************************************/\
+\
+int sbapi_get_number_of_spectrum_processing_features(long deviceID, int *error_code) \
+\{\
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();\
+\
+    return wrapper->getNumberOfSpectrumProcessingFeatures(deviceID, error_code);\
+\}\
+\
+int sbapi_get_spectrum_processing_features(long deviceID, int *error_code, long *spectrumProcessingFeatures, int max_features) \
+\{\
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();\
+\
+    return wrapper->getSpectrumProcessingFeatures(deviceID, error_code, spectrumProcessingFeatures, max_features);\
+\}\
+\
+unsigned short int sbapi_spectrum_processing_scans_to_average_get(long deviceID, long spectrumProcessingFeatureID, int *error_code) \
+\{\
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();\
+\
+    return wrapper->spectrumProcessingScansToAverageGet(deviceID, spectrumProcessingFeatureID, error_code);\
+\}\
+\
+unsigned char sbapi_spectrum_processing_boxcar_width_get(long deviceID, long spectrumProcessingFeatureID, int *error_code) \
+\{\
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();\
+\
+    return wrapper->spectrumProcessingBoxcarWidthGet(deviceID, spectrumProcessingFeatureID, error_code);\
+\}\
+\
+void sbapi_spectrum_processing_scans_to_average_set(long deviceID, long featureID,\
+        int *error_code, unsigned short int scansToAverage) \
+\{\
+\
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();\
+\
+    wrapper->spectrumProcessingScansToAverageSet(deviceID, featureID, error_code,\
+            scansToAverage);\
+\}\
+\
+void sbapi_spectrum_processing_boxcar_width_set(long deviceID, long featureID,\
+        int *error_code, unsigned char boxcarWidth) \
+\{\
+\
+    SeaBreezeAPI *wrapper = SeaBreezeAPI::getInstance();\
+\
+    wrapper->spectrumProcessingBoxcarWidthSet(deviceID, featureID, error_code,\
+            boxcarWidth);\
+\}\
+\
+
+\b \
+8. The most important file with respect to the automatically generated documentation is the SeabreezeAPI.h file. When adding your features pay special attention to coding convention, otherwise your new features could remain hidden to future implementers or sadly obfuscated, preventing use.
+\b0 \
+\
+
+\b Add declarations.
+\b0 \
+\
+\
+    /* Spectrum processing capabilities */\
+    int getNumberOfSpectrumProcessingFeatures(long deviceID, int *errorCode);\
+    int getSpectrumProcessingFeatures(long deviceID, int *errorCode, long *buffer, unsigned int maxLength);\
+    unsigned char spectrumProcessingBoxcarWidthGet(long deviceID, long featureID, int *errorCode);\
+    unsigned short int spectrumProcessingScansToAverageGet(long deviceID, long featureID, int *errorCode);\
+    void spectrumProcessingBoxcarWidthSet(long deviceID, long featureID, int *errorCode, unsigned char boxcarWidth);\
+    void spectrumProcessingScansToAverageSet(long deviceID, long featureID, int *errorCode, unsigned short int scansToAverage);\
+\
+\
+
+\b Add dynamic linked library references, but most importantly, doxygen descriptions for each method exposed to the API. Note the way functions are named, prefaced by 
+\i sbapi_
+\i0  and how comments are formatted. Keep naming consistent or you will be pouring over linker errors.\
+
+\b0 \
+/**\
+     * This function returns the total number of spectrum processing feature\
+     * instances available in the indicated device.\
+     *\
+     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().\
+     * @param error_code (Output) A pointer to an integer that can be used for storing\
+     *      error codes.\
+     *\
+     * @return the number of features that will be returned by a call to\
+     *      sbapi_get_spectrum_processing_features().\
+     */\
+    DLL_DECL int\
+    sbapi_get_number_of_spectrum_processing_features(\
+            long deviceID, int *error_code);\
+\
+    /**\
+     * This function returns IDs for accessing each spectrum processing\
+     * feature instance for this device.  The IDs are only valid when used with\
+     * the deviceID used to obtain them.\
+     *\
+     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().\
+     * @param error_code (Output) A pointer to an integer that can be used for storing\
+     *      error codes.\
+     * @param features (Output) preallocated array to hold returned feature handles\
+     * @param max_features (Input) size of preallocated array\
+     *\
+     * @return the number of spectrum processing feature IDs that were copied.\
+     */\
+    DLL_DECL int\
+    sbapi_get_spectrum_processing_features(long deviceID, int *error_code,\
+            long *spectrumProcessingFeatures, int max_features);\
+\
+    /**\
+     * This function reads out an the number of scans to average from the\
+     *  device's internal memory if that feature is supported.\
+     *\
+     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().\
+     * @param featureID (Input) The ID of a particular instance of a spectrum processing\
+     *        feature.  Valid IDs can be found with the\
+     *        sbapi_get_spectrum_processing_features() function.\
+     * @param error_code (Output) A pointer to an integer that can be used for storing\
+     *      error codes.\
+     *\
+     * @return the number of scans to average as an unsigned short integer \
+     */\
+    DLL_DECL unsigned short int sbapi_spectrum_processing_scans_to_average_get(long deviceID,\
+    	 long spectrumProcessingFeatureID, int *error_code);\
+\
+    /**\
+     * This function sets the number of scans to average in the the device's\
+     * internal memory if that feature is supported.\
+     *\
+     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().\
+     * @param featureID (Input) The ID of a particular instance of a spectrum processing\
+     *        feature.  Valid IDs can be found with the\
+     *        sbapi_get_spectrum_processing_features() function.\
+     * @param error_code (Output) A pointer to an integer that can be used for storing\
+     *      error codes.\
+     * @param scansToAverage (Input) The number of spectrum scans used to generate a less\
+     *		noisy spectrum due to averaging\
+     *\
+     * @return void\
+     */\
+    DLL_DECL void sbapi_spectrum_processing_scans_to_average_set(long deviceID, \
+    	long spectrumProcessingFeatureID, int *error_code, unsigned short int scansToAverage);\
+\
+    /**\
+     * This function reads out an the width of the boxcar filter from the\
+     *  device's internal memory if that feature is supported.\
+     *\
+     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().\
+     * @param featureID (Input) The ID of a particular instance of a spectrum processing\
+     *        feature.  Valid IDs can be found with the\
+     *        sbapi_get_spectrum_processing_features() function.\
+     * @param error_code (Output) A pointer to an integer that can be used for storing\
+     *      error codes.\
+     *\
+     * @return the width of the boxcar filter an unsigned char (values typically 0-15)\
+     */\
+    DLL_DECL unsigned char sbapi_spectrum_processing_boxcar_width_get(long deviceID,\
+    	 long spectrumProcessingFeatureID, int *error_code);\
+\
+    /**\
+     * This function sets width of the boxcar filter in the the device's\
+     * internal memory if that feature is supported.\
+     *\
+     * @param deviceID (Input) The index of a device previously opened with sbapi_open_device().\
+     * @param featureID (Input) The ID of a particular instance of a spectrum processing\
+     *        feature.  Valid IDs can be found with the\
+     *        sbapi_get_spectrum_processing_features() function.\
+     * @param error_code (Output) A pointer to an integer that can be used for storing\
+     *      error codes.\
+     * @param boxcarWidth (Input) The width of the boxcar smoothing function to be used.\
+     *			Values are typically 1 to 15.\
+     *\
+     * @return void\
+     */\
+    DLL_DECL void sbapi_spectrum_processing_boxcar_width_set(long deviceID, \
+    		long spectrumProcessingFeatureID, int *error_code, unsigned char boxcarWidth);\
+   \
+\
+
+\b 9. Move to 
+\i Seabreeze/src/vendors/OceanOptics
+\i0 . If you want to add another vendor spectrometer, this is the level at which that would be done. Although, it is beyond the scope of this document, suffice it to say that duplicating the structure of the OceanOptics directory would be required. Adding a new spectrometer would be done in 
+\i Seabreeze/src/vendors/OceanOptics/Devices/
+\i0 . After creating the feature files, the spectrometer file for which the new feature is being added, will be modified as well. However, since this document is concerned with adding new features to devices already defined, first navigate to 
+\i Seabreeze/src/vendors/OceanOptics/features/
+\i0 .  \
+\
+For spectrum processing, a folder named 
+\i spectrum_processing
+\i0  was created. The makefile is the same for all of the feature folders. Create it or copy it from another feature folder.
+\b0 \
+\
+SEABREEZE = ../../../../..\
+\
+all: deps objs\
+\
+SUBDIRS =\
+\
+include $(SEABREEZE)/common.mk\
+\
+
+\b \
+A feature processing file called, SpectrumProcessingFeature was created. Your new feature folder should contain a similarly structured file named for your feature. Again, the file is included in its entirety for duplication. Three header files are included that reference the feature implementation, processing protocol and protocol interface. In this case the spectrum processing commands are issued in the Ocean Binary Protocol, which is already implemented in SeaBreeze. This file is normally just a matter of passing features through to the API. Following the coding structure is important so that when exception handling is fully implemented in the future, your code may be easily adapted.\
+\
+Note the usage of the definition, SPECTRUM_PROCESSING, at the bottom of the file. Leaving this out or forgetting to change it after copying the file contents will cause seemingly unrelated problems later.
+\b0 \
+\
+/***************************************************//**\
+ * @file    SpectrumProcessingFeature.cpp\
+ * @date    February 2015\
+ * @author  Kirk Clendinning, Heliospectra\
+ *\
+ * LICENSE:\
+ *\
+ * SeaBreeze Copyright (C) 2015, Heliospetra AB\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining\
+ * a copy of this software and associated documentation files (the\
+ * "Software"), to deal in the Software without restriction, including\
+ * without limitation the rights to use, copy, modify, merge, publish,\
+ * distribute, sublicense, and/or sell copies of the Software, and to\
+ * permit persons to whom the Software is furnished to do so, subject\
+ * to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included\
+ * in all copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,\
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\
+ *******************************************************/\
+\
+#include "common/globals.h"\
+\cf3 #include "vendors/OceanOptics/features/spectrum_processing/SpectrumProcessingFeature.h"\
+#include "vendors/OceanOptics/protocols/interfaces/SpectrumProcessingProtocolInterface.h"\
+#include "vendors/OceanOptics/protocols/obp/impls/OBPSpectrumProcessingProtocol.h"\cf0 \
+#include "common/exceptions/FeatureProtocolNotFoundException.h"\
+#include "common/exceptions/FeatureControlException.h"\
+#include "api/seabreezeapi/FeatureFamilies.h"\
+\
+using namespace seabreeze;\
+using namespace seabreeze::oceanBinaryProtocol;\
+using namespace seabreeze::api;\
+using namespace std;\
+\
+SpectrumProcessingFeature::SpectrumProcessingFeature(vector<ProtocolHelper *> helpers) \
+\{\
+    vector<ProtocolHelper *>::iterator iter;\
+\
+    for(iter = helpers.begin(); iter != helpers.end(); iter++) \
+    \{\
+        this->protocols.push_back(*iter);\
+    \}\
+\}\
+\
+SpectrumProcessingFeature::~SpectrumProcessingFeature() \
+\{\
+\
+\}\
+\
+#ifdef _WINDOWS\
+#pragma warning (disable: 4101) // unreferenced local variable\
+#endif\
+\
+unsigned short int SpectrumProcessingFeature::readSpectrumProcessingScansToAverage(\
+		const Protocol &protocol, const Bus &bus) throw (FeatureException) \
+\{\
+\
+    SpectrumProcessingProtocolInterface *processingPI = NULL;\
+	unsigned short int scansToAverage;\
+    ProtocolHelper *proto = NULL;\
+\
+    try \
+    \{\
+        proto = lookupProtocolImpl(protocol);\
+        processingPI = static_cast<SpectrumProcessingProtocolInterface *>(proto);\
+    \} catch (FeatureProtocolNotFoundException &e) \
+    \{\
+        string error(\
+                "Could not find matching protocol implementation to get SpectrumProcessing.\'94);\
+        /* FIXME: previous exception should probably be bundled up into the new exception */\
+        throw FeatureProtocolNotFoundException(error);\
+    \}\
+\
+    try \
+    \{\
+        scansToAverage = processingPI->readSpectrumProcessingScansToAverage(bus);\
+        return scansToAverage;\
+    \} catch (ProtocolException &pe) \
+    \{\
+        string error("Caught protocol exception: ");\
+        error += pe.what();\
+        /* FIXME: previous exception should probably be bundled up into the new exception */\
+        throw FeatureControlException(error);\
+    \}\
+\}\
+\
+void SpectrumProcessingFeature::writeSpectrumProcessingScansToAverage(const Protocol &protocol,\
+        const Bus &bus, unsigned short int scansToAverage) throw (FeatureException, IllegalArgumentException) \
+\{\
+\
+    SpectrumProcessingProtocolInterface *processingPI = NULL;\
+    ProtocolHelper *proto = NULL;\
+\
+    try \
+    \{\
+        proto = lookupProtocolImpl(protocol);\
+        processingPI = static_cast<SpectrumProcessingProtocolInterface *>(proto);\
+    \} catch (FeatureProtocolNotFoundException fpnfe) \
+    \{\
+        string error(\
+                "Could not find matching protocol implementation to set thermoelectric state.");\
+        /* FIXME: previous exception should probably be bundled up into the new exception */\
+        throw FeatureProtocolNotFoundException(error);\
+    \}\
+\
+    try \
+    \{\
+        processingPI->writeSpectrumProcessingScansToAverage(bus, scansToAverage);\
+    \} catch (ProtocolException &pe) \
+    \{\
+        string error("Caught protocol exception: ");\
+        error += pe.what();\
+        /* FIXME: previous exception should probably be bundled up into the new exception */\
+        throw FeatureControlException(error);\
+    \}\
+\}\
+\
+unsigned char SpectrumProcessingFeature::readSpectrumProcessingBoxcarWidth(\
+		const Protocol &protocol, const Bus &bus) throw (FeatureException) \
+\{\
+\
+    SpectrumProcessingProtocolInterface *processingPI = NULL;\
+	unsigned char boxcarWidth;\
+    ProtocolHelper *proto = NULL;\
+\
+    try \
+    \{\
+        proto = lookupProtocolImpl(protocol);\
+        processingPI = static_cast<SpectrumProcessingProtocolInterface *>(proto);\
+    \} catch (FeatureProtocolNotFoundException &e) \
+    \{\
+        string error(\
+                "Could not find matching protocol implementation to get boxcar filter width.\'94);\
+        /* FIXME: previous exception should probably be bundled up into the new exception */\
+        throw FeatureProtocolNotFoundException(error);\
+    \}\
+\
+    try \
+    \{\
+        boxcarWidth = processingPI->readSpectrumProcessingBoxcarWidth(bus);\
+        return boxcarWidth;\
+    \} catch (ProtocolException &pe) \
+    \{\
+        string error("Caught protocol exception: ");\
+        error += pe.what();\
+        /* FIXME: previous exception should probably be bundled up into the new exception */\
+        throw FeatureControlException(error);\
+    \}\
+\}\
+\
+void SpectrumProcessingFeature::writeSpectrumProcessingBoxcarWidth(const Protocol &protocol,\
+        const Bus &bus, unsigned char boxcarWidth) throw (FeatureException, IllegalArgumentException) \
+\{\
+\
+    SpectrumProcessingProtocolInterface *processingPI = NULL;\
+    ProtocolHelper *proto = NULL;\
+\
+    try \
+    \{\
+        proto = lookupProtocolImpl(protocol);\
+        processingPI = static_cast<SpectrumProcessingProtocolInterface *>(proto);\
+    \} catch (FeatureProtocolNotFoundException fpnfe) \
+    \{\
+        string error(\
+                "Could not find matching protocol implementation to set thermoelectric state.");\
+        /* FIXME: previous exception should probably be bundled up into the new exception */\
+        throw FeatureProtocolNotFoundException(error);\
+    \}\
+\
+    try \
+    \{\
+        processingPI->writeSpectrumProcessingBoxcarWidth(bus, boxcarWidth);\
+    \} catch (ProtocolException &pe) \
+    \{\
+        string error("Caught protocol exception: ");\
+        error += pe.what();\
+        /* FIXME: previous exception should probably be bundled up into the new exception */\
+        throw FeatureControlException(error);\
+    \}\
+\}\
+\
+FeatureFamily SpectrumProcessingFeature::getFeatureFamily() \
+\{\
+    FeatureFamilies families;\
+\
+    return families.SPECTRUM_PROCESSING;\
+\}\
+\
+
+\b Remember to modify the Makefile inside the features directory to include your new directory. The following shows the addition made for the spectrum_processing folder.
+\b0 \
+\
+SEABREEZE = ../../../..\
+\
+all: deps objs\
+\
+SUBDIRS = \\\
+    continuous_strobe   \\\
+    eeprom_slots        \\\
+    fpga_register       \\\
+    irradcal            \\\
+    light_source        \\\
+    nonlinearity        \\\
+    temperature         \\\
+    revision            \\\
+    optical_bench       \\\
+    raw_bus_access      \\\
+    serial_number       \\\
+    shutter             \\\
+    spectrometer        \\\
+\cf3     spectrum_processing \\\
+\cf0     stray_light         \\\
+    thermoelectric      \\\
+    wavecal\
+\
+include $(SEABREEZE)/common.mk\
+\
+
+\b 10. The include side of the feature also requires a directory to be created, again for spectrum processing, it is called 
+\i spectrum_processing
+\i0 . Two headers should be created in the directory. For spectrum processing they were called, 
+\i SpectrumProcessingFeature.h
+\i0  and 
+\i SpectrumProcessingFeatureInterface.h
+\i0 . They are both included in their entirety.
+\b0 \
+
+\b \
+Spectrum processingFeatureInterface is a declaration of implementation methods that are passed to the adapter level interface. Note the naming convention. Methods at this level read and write, rather than get and set. Again note convention with respect to exception handling.
+\b0 \
+\
+/***************************************************//**\
+ * @file    SpectrumProcessingFeatureInterface.h\
+ * @date    February 2015\
+ * @author  Ocean Optics, Inc., Kirk Clendinning, Heliospectra\
+ *\
+ * LICENSE:\
+ *\
+ * SeaBreeze Copyright (C) 2015, Ocean Optics Inc\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining\
+ * a copy of this software and associated documentation files (the\
+ * "Software"), to deal in the Software without restriction, including\
+ * without limitation the rights to use, copy, modify, merge, publish,\
+ * distribute, sublicense, and/or sell copies of the Software, and to\
+ * permit persons to whom the Software is furnished to do so, subject\
+ * to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included\
+ * in all copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,\
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\
+ *******************************************************/\
+\
+\cf3 #ifndef SPECTRUMPROCESSINGFEATUREINTERFACE_H\
+#define SPECTRUMPROCESSINGFEATUREINTERFACE_H\cf0 \
+\
+#include "common/protocols/Protocol.h"\
+#include "common/buses/Bus.h"\
+#include "common/exceptions/FeatureException.h"\
+#include "common/exceptions/IllegalArgumentException.h"\
+\
+namespace seabreeze \{\
+\
+    class SpectrumProcessingFeatureInterface \{\
+    public:\
+        virtual ~SpectrumProcessingFeatureInterface() = 0;\
+        virtual unsigned char readSpectrumProcessingBoxcarWidth(const Protocol &protocol,\
+                const Bus &bus) throw (FeatureException) = 0;\
+        virtual unsigned short int readSpectrumProcessingScansToAverage(const Protocol &protocol,\
+                const Bus &bus) throw (FeatureException) = 0;\
+        virtual void writeSpectrumProcessingBoxcarWidth(const Protocol &protocol,\
+                const Bus &bus, unsigned char boxcarWidth)\
+                throw (FeatureException, IllegalArgumentException) = 0;\
+        virtual void writeSpectrumProcessingScansToAverage(const Protocol &protocol,\
+                const Bus &bus, unsigned short int scansToAverage)\
+                throw (FeatureException, IllegalArgumentException) = 0;\
+    \};\
+\
+    /* Default implementation for (otherwise) pure virtual destructor */\
+    inline SpectrumProcessingFeatureInterface::~SpectrumProcessingFeatureInterface() \{\}\
+\}\
+\
+\cf3 #endif /* SPECTRUMPROCESSINGFEATUREINTERFACE_H */\
+\
+
+\b \cf0 The feature header file is similar. Reproducing these files supports conformity with the API architecture.\
+
+\b0 \
+/***************************************************//**\
+ * @file    SpectrumProcessingFeature.h\
+ * @date    February 2015\
+ * @author  Kirk Clendinning, Heliospectra\
+ *\
+ * LICENSE:\
+ *\
+ * SeaBreeze Copyright (C) 2015, Ocean Optics Inc\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining\
+ * a copy of this software and associated documentation files (the\
+ * "Software"), to deal in the Software without restriction, including\
+ * without limitation the rights to use, copy, modify, merge, publish,\
+ * distribute, sublicense, and/or sell copies of the Software, and to\
+ * permit persons to whom the Software is furnished to do so, subject\
+ * to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included\
+ * in all copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,\
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\
+ *******************************************************/\
+\
+\cf3 #ifndef SPECTRUMPROCESSINGFEATURE_H\
+#define SPECTRUMPROCESSINGFEATURE_H\cf0 \
+\
+#include <vector>\
+\
+\cf3 #include "vendors/OceanOptics/features/spectrum_processing/SpectrumProcessingFeatureInterface.h"\
+\cf0 #include "common/protocols/Protocol.h"\
+#include "common/features/Feature.h"\
+#include "common/buses/Bus.h"\
+#include "common/exceptions/FeatureException.h"\
+#include "common/exceptions/IllegalArgumentException.h"\
+\
+namespace seabreeze \{\
+\
+    class SpectrumProcessingFeature\
+                : public Feature, public SpectrumProcessingFeatureInterface \{\
+    public:\
+        SpectrumProcessingFeature(std::vector<ProtocolHelper *> helpers);\
+        virtual ~SpectrumProcessingFeature();\
+        virtual unsigned char readSpectrumProcessingBoxcarWidth(\
+        	const Protocol &protocol, const Bus &bus) \
+            throw (FeatureException);\
+        virtual unsigned short int readSpectrumProcessingScansToAverage(\
+        	const Protocol &protocol, const Bus &bus) \
+        	throw (FeatureException);\
+        virtual void writeSpectrumProcessingBoxcarWidth(const Protocol &protocol,\
+        	const Bus &bus, unsigned char boxcarWidth) \
+        	throw (FeatureException, IllegalArgumentException);\
+        virtual void writeSpectrumProcessingScansToAverage(const Protocol &protocol,\
+                const Bus &bus, unsigned short int scansToAverage)\
+                throw (FeatureException, IllegalArgumentException);\
+                \
+        /* Overriding from Feature */\
+        virtual FeatureFamily getFeatureFamily();\
+    \};\
+\
+\}\
+\
+\cf3 #endif /* SPECTRUMPROCESSINGFEATURE_H */\
+\cf0 \
+\
+
+\b 11. Find the spectrometer file corresponding to the device, for which your new feature is being added in the 
+\i devices
+\i0  directory, mentioned earlier. The 
+\i boxcar filter width
+\i0  and 
+\i scans to average
+\i0  features were added to the STS spectrometer feature set, so 
+\i STS.cpp
+\i0  is discussed in this document.
+\b0 \
+\
+
+\b Add the header file reference for the Ocean Bit Protocol implementation.\
+
+\b0 \
+#include "vendors/OceanOptics/protocols/obp/impls/OBPSpectrumProcessingProtocol.h"\
+\
+\
+
+\b Add the header file reference for the feature.\
+
+\b0 \
+#include "vendors/OceanOptics/features/spectrum_processing/SpectrumProcessingFeature.h"\
+\
+\
+
+\b Add a vector of helpers to for helping the feature adapter find the appropriate protocol.\
+
+\b0 \
+    /* Add spectrum processing feature */\
+    vector<ProtocolHelper *> spectrumProcessingHelpers;\
+    spectrumProcessingHelpers.push_back(new OBPSpectrumProcessingProtocol());\
+    this->features.push_back(\
+        new SpectrumProcessingFeature(spectrumProcessingHelpers));\
+\
+
+\b 12. In SeaBreeze/src/vendors/OceanOptics/protocols/interfaces/, duplicate a ProtocolInteface file. The file for the spectrum processing feature is included in its entirety.
+\b0 \
+\
+/***************************************************//**\
+ * @file    SpectrumProcessingProtocolInterface.cpp\
+ * @date    January 2015\
+ * @author  Kirk Clendinning, Heliospectra\
+ *\
+ * LICENSE:\
+ *\
+ * SeaBreeze Copyright (C) 2015, Heliospectra AB\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining\
+ * a copy of this software and associated documentation files (the\
+ * "Software"), to deal in the Software without restriction, including\
+ * without limitation the rights to use, copy, modify, merge, publish,\
+ * distribute, sublicense, and/or sell copies of the Software, and to\
+ * permit persons to whom the Software is furnished to do so, subject\
+ * to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included\
+ * in all copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,\
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\
+ *******************************************************/\
+\
+#include "common/globals.h"\
+\cf3 #include "vendors/OceanOptics/protocols/interfaces/SpectrumProcessingProtocolInterface.h"\
+\cf0 \
+using namespace seabreeze;\
+\
+SpectrumProcessingProtocolInterface::SpectrumProcessingProtocolInterface(Protocol *protocol)\
+    : ProtocolHelper(protocol) \{\
+\
+\}\
+\
+SpectrumProcessingProtocolInterface::~SpectrumProcessingProtocolInterface() \{\
+\
+\}\
+\
+\
+
+\b 13. In SeaBreeze/indclude/vendors/OceanOptics/protocols/interfaces/, duplicate a ProtocolInteface header file. The file for the spectrum processing feature is included in its entirety. Observe exception handling and method naming conventions.
+\b0 \
+\
+\
+/***************************************************//**\
+ * @file    SpectrumProcessingProtocolInterface.h\
+ * @date    February 2015\
+ * @author  Kirk Clendinning, Heliospectra\
+ *\
+ * This is a simple interface for any protocol to implement\
+ * that provides a protocol-agnostic mechanism for accessing\
+ * spectrum processing features on an Ocean Optics device.\
+ *\
+ * This does not extend Protocol or otherwise get involved\
+ * in that hierarchy because it might interfere with the\
+ * lookup process for getting a Protocol object to delegate\
+ * these methods to.  Worse, it could end up inheriting\
+ * twice from the same base class, which is just messy.\
+ *\
+ * LICENSE:\
+ *\
+ * SeaBreeze Copyright (C) 2015, Ocean Optics Inc\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining\
+ * a copy of this software and associated documentation files (the\
+ * "Software"), to deal in the Software without restriction, including\
+ * without limitation the rights to use, copy, modify, merge, publish,\
+ * distribute, sublicense, and/or sell copies of the Software, and to\
+ * permit persons to whom the Software is furnished to do so, subject\
+ * to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included\
+ * in all copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,\
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\
+ *******************************************************/\
+\
+\cf3 #ifndef SPECTRUMPROCESSINGPROTOCOLINTERFACE_H\
+#define SPECTRUMPROCESSINGPROTOCOLINTERFACE_H\cf0 \
+\
+#include "common/SeaBreeze.h"\
+#include "common/buses/Bus.h"\
+#include <vector>\
+#include "common/exceptions/ProtocolException.h"\
+#include "common/protocols/ProtocolHelper.h"\
+\
+namespace seabreeze \{\
+\
+    class SpectrumProcessingProtocolInterface : public ProtocolHelper \{\
+    public:\
+        SpectrumProcessingProtocolInterface(Protocol *protocol);\
+        virtual ~SpectrumProcessingProtocolInterface();\
+        virtual unsigned char readSpectrumProcessingBoxcarWidth(const Bus &bus)\
+                throw (ProtocolException) = 0;\
+        virtual unsigned short int readSpectrumProcessingScansToAverage(const Bus &bus)\
+                throw (ProtocolException) = 0;\
+        virtual void writeSpectrumProcessingBoxcarWidth(const Bus &bus, unsigned char boxcarWidth)\
+        		throw (ProtocolException) = 0;\
+        virtual void writeSpectrumProcessingScansToAverage(const Bus &bus, unsigned short int scansToAverage)\
+        		throw (ProtocolException) = 0;\
+    \};\
+\
+\}\
+\
+\cf3 #endif /* SPECTRUMPROCESSINGPROTOCOLINTERFACE_H */\
+\
+\
+
+\b \cf0 14. If the new features are supported under the Ocean Binary Protocol, the command ID\'92s should be added to the Seabreeze/include/vendors/OceanOptics/protocols/obp/constants/OBPMessageTypes.h. The commands below were found in the 
+\i STS Data Sheet
+\i0 .\
+
+\b0 \
+// Spectrum filtering and averaging        \
+        static const unsigned int OBP_GET_SCANS_TO_AVERAGE          = 0x00120000;\
+        static const unsigned int OBP_SET_SCANS_TO_AVERAGE          = 0x00120010;\
+        static const unsigned int OBP_GET_BOXCAR_WIDTH             = 0x00121000;\
+        static const unsigned int OBP_SET_BOXCAR_WIDTH             = 0x00121010;\
+\
+
+\b 15. Move to the Seabreeze/src/vendors/OceanOptics/protocols/obp/exchanges/ folder. A file like OBPSetBoxcarWidthExchange.cpp should be created for each feature you intend to implement. In this case get and set for both 
+\i boxcar filter width
+\i0  and 
+\i scans to average
+\i0 . A set and a get example are included below. The functionality included in the constructor of these files establishes hints for protocols, sets the message ID and the payload size.
+\b0 \
+\
+
+\b Set functionality:
+\b0 \
+\
+/***************************************************//**\
+ * @file    OBPSetBoxcarWidthExchange.cpp\
+ * @date    February 2015\
+ * @author  Ocean Optics, Inc., Kirk Clendinning, Heliospectra\
+ *\
+ * LICENSE:\
+ *\
+ * SeaBreeze Copyright (C) 2015, Ocean Optics Inc\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining\
+ * a copy of this software and associated documentation files (the\
+ * "Software"), to deal in the Software without restriction, including\
+ * without limitation the rights to use, copy, modify, merge, publish,\
+ * distribute, sublicense, and/or sell copies of the Software, and to\
+ * permit persons to whom the Software is furnished to do so, subject\
+ * to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included\
+ * in all copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,\
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\
+ *******************************************************/\
+\
+#include <string.h> // for memcpy\
+#include "common/globals.h"\
+\cf3 #include "vendors/OceanOptics/protocols/obp/exchanges/OBPSetBoxcarWidthExchange.h"\
+\cf0 #include "vendors/OceanOptics/protocols/obp/hints/OBPControlHint.h"\
+#include "vendors/OceanOptics/protocols/obp/constants/OBPMessageTypes.h"\
+\
+using namespace seabreeze;\
+using namespace seabreeze::oceanBinaryProtocol;\
+\
+OBPSetBoxcarWidthExchange::OBPSetBoxcarWidthExchange() \
+\{\
+    this->hints->push_back(new OBPControlHint());\
+    this->messageType = OBPMessageTypes::OBP_SET_BOXCAR_WIDTH;\
+    this->payload.resize(sizeof(unsigned char));\
+\}\
+\
+OBPSetBoxcarWidthExchange::~OBPSetBoxcarWidthExchange() \
+\{\
+\
+\}\
+\
+void OBPSetBoxcarWidthExchange::setBoxcarWidth(unsigned char boxcarWidth) \
+\{\
+    memcpy(&(this->payload[0]), &boxcarWidth, sizeof(unsigned char));\
+\}\
+\
+
+\b Get functionality:
+\b0 \
+\
+/***************************************************//**\
+ * @file    OBPGetBoxcarWidthExchange.cpp\
+ * @date    February 2015\
+ * @author  Ocean Optics, Inc., Kirk Clendinning, Heliospectra\
+ *\
+ * LICENSE:\
+ *\
+ * SeaBreeze Copyright (C) 2015, Ocean Optics Inc\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining\
+ * a copy of this software and associated documentation files (the\
+ * "Software"), to deal in the Software without restriction, including\
+ * without limitation the rights to use, copy, modify, merge, publish,\
+ * distribute, sublicense, and/or sell copies of the Software, and to\
+ * permit persons to whom the Software is furnished to do so, subject\
+ * to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included\
+ * in all copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,\
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\
+ *******************************************************/\
+\
+#include "common/globals.h"\
+\cf3 #include "vendors/OceanOptics/protocols/obp/exchanges/OBPGetBoxcarWidthExchange.h"\
+\cf0 #include "vendors/OceanOptics/protocols/obp/hints/OBPControlHint.h"\
+#include "vendors/OceanOptics/protocols/obp/constants/OBPMessageTypes.h"\
+\
+using namespace seabreeze;\
+using namespace seabreeze::oceanBinaryProtocol;\
+\
+OBPGetBoxcarWidthExchange::OBPGetBoxcarWidthExchange() \
+\{\
+    this->hints->push_back(new OBPControlHint());\
+    this->messageType = OBPMessageTypes::OBP_GET_BOXCAR_WIDTH;\
+    this->payload.resize(sizeof(unsigned char));\
+\}\
+\
+OBPGetBoxcarWidthExchange::~OBPGetBoxcarWidthExchange() \
+\{\
+\
+\}\
+\
+\
+
+\b 16. Corresponding header files should be present in the build tree at SeaBreeze/include/vendors/OceanOptics/protocols/obp/exchanges/.\
+\
+Set functionality:
+\b0 \
+\
+/***************************************************//**\
+ * @file    OBPSetBoxcarWidthExchange.h\
+ * @date    Februayr 2015\
+ * @author  Ocean Optics, Inc., Kirk Clendinning, Heliospectra\
+ *\
+ * LICENSE:\
+ *\
+ * SeaBreeze Copyright (C) 2015, Ocean Optics Inc\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining\
+ * a copy of this software and associated documentation files (the\
+ * "Software"), to deal in the Software without restriction, including\
+ * without limitation the rights to use, copy, modify, merge, publish,\
+ * distribute, sublicense, and/or sell copies of the Software, and to\
+ * permit persons to whom the Software is furnished to do so, subject\
+ * to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included\
+ * in all copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,\
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\
+ *******************************************************/\
+\
+\cf3 #ifndef OBPSETBOXCARWIDTHEXCHANGE_H\
+#define OBPSETBOXCARWIDTHEXCHANGE_H\cf0 \
+\
+#include "vendors/OceanOptics/protocols/obp/exchanges/OBPCommand.h"\
+\
+namespace seabreeze \
+\{\
+  namespace oceanBinaryProtocol \
+ \{\
+    class OBPSetBoxcarWidthExchange : public OBPCommand \
+   \{\
+    public:\
+        OBPSetBoxcarWidthExchange();\
+        virtual ~OBPSetBoxcarWidthExchange();\
+        void setBoxcarWidth(unsigned char boxcarWidth);\
+    \};\
+  \}\
+\}\
+\
+\cf3 #endif /* OBPSETBOXCARWIDTHEXCHANGE_H */\
+\
+\
+
+\b \cf0 Get functionality:\
+
+\b0 \
+/***************************************************//**\
+ * @file    OBPGetBoxcarWidthExchange.h\
+ * @date    February 2015\
+ * @author  Ocean Optics, Inc., Kirk Clendinning, Heliospectra\
+ *\
+ * LICENSE:\
+ *\
+ * SeaBreeze Copyright (C) 2015, Ocean Optics Inc\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining\
+ * a copy of this software and associated documentation files (the\
+ * "Software"), to deal in the Software without restriction, including\
+ * without limitation the rights to use, copy, modify, merge, publish,\
+ * distribute, sublicense, and/or sell copies of the Software, and to\
+ * permit persons to whom the Software is furnished to do so, subject\
+ * to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included\
+ * in all copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,\
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\
+ *******************************************************/\
+\
+\cf3 #ifndef OBPGETBOXCARWIDTHEXCHANGE_H\
+#define OBPGETBOXCARWIDTHEXCHANGE_H\cf0 \
+\
+#include "vendors/OceanOptics/protocols/obp/exchanges/OBPQuery.h"\
+\
+namespace seabreeze \
+\{\
+    namespace oceanBinaryProtocol \
+   \{\
+        class OBPGetBoxcarWidthExchange : public OBPQuery \
+        \{\
+        public:\
+            OBPGetBoxcarWidthExchange();\
+            virtual ~OBPGetBoxcarWidthExchange();\
+        \};\
+    \}\
+\}\
+\
+\cf3 #endif /* OBPGETBOXCARWIDTHEXCHANGE_H */\
+\cf0 \
+\
+
+\b 17. Move to the Seabreeze/src/vendors/OceanOptics/protocols/obp/impls/ folder. This is where the protocol is implemented.   The OBPSpectrumProcessingProtocol.cpp file is an example. There should be one header reference corresponding to the protocol and a reference for each exchange, which was written for each feature implemented. \
+\
+Notice that these methods use the helpers defined in the exchanges to connect the appropriate protocol to a particular feature. It is within these methods that data from the spectrometer is processed and formatted. Earlier it was noted that memory from lower levels was freed, it would be here that memory would have been allocated. readOpticalBenchID() in OBPOpticalBenchProtocol.cpp is an example of one such a memory allocation.  Follow convention to assure exception handling is compatible with the SeaBreeze architecture. Care should be taken to consistently define data types throughout the API for each feature and to avoid buffer overruns and memory leaks.\
+\
+\
+
+\b0 /***************************************************//**\
+ * @file    OBPSpectrumProcessingProtocol.cpp\
+ * @date    February 2015\
+ * @author  Ocean Optics, Inc., Kirk Clendinning, Heliospectra\
+ *\
+ * LICENSE:\
+ *\
+ * SeaBreeze Copyright (C) 2015, Ocean Optics Inc\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining\
+ * a copy of this software and associated documentation files (the\
+ * "Software"), to deal in the Software without restriction, including\
+ * without limitation the rights to use, copy, modify, merge, publish,\
+ * distribute, sublicense, and/or sell copies of the Software, and to\
+ * permit persons to whom the Software is furnished to do so, subject\
+ * to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included\
+ * in all copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,\
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\
+ *******************************************************/\
+\
+#include "common/globals.h"\
+\cf3 #include "vendors/OceanOptics/protocols/obp/impls/OBPSpectrumProcessingProtocol.h"\
+#include "vendors/OceanOptics/protocols/obp/exchanges/OBPGetScansToAverageExchange.h"\
+#include "vendors/OceanOptics/protocols/obp/exchanges/OBPSetScansToAverageExchange.h"\
+#include "vendors/OceanOptics/protocols/obp/exchanges/OBPGetBoxcarWidthExchange.h"\
+#include "vendors/OceanOptics/protocols/obp/exchanges/OBPSetBoxcarWidthExchange.h"\cf0 \
+#include "vendors/OceanOptics/protocols/obp/impls/OceanBinaryProtocol.h"\
+#include "common/exceptions/ProtocolBusMismatchException.h"\
+\
+using namespace seabreeze;\
+using namespace seabreeze::oceanBinaryProtocol;\
+using namespace std;\
+\
+OBPSpectrumProcessingProtocol::OBPSpectrumProcessingProtocol()\
+        : SpectrumProcessingProtocolInterface(new OceanBinaryProtocol()) \
+\{\
+\
+\}\
+\
+OBPSpectrumProcessingProtocol::~OBPSpectrumProcessingProtocol() \
+\{\
+\
+\}\
+\
+\
+unsigned short int OBPSpectrumProcessingProtocol::readSpectrumProcessingScansToAverage(const Bus &bus)\
+                throw (ProtocolException) \
+\{\
+    vector<byte> *result = NULL;\
+    unsigned short int scansToAverage;\
+    byte *bptr;\
+        \
+    OBPGetScansToAverageExchange xchange;\
+	\
+    TransferHelper *helper = bus.getHelper(xchange.getHints());\
+    if(NULL == helper) \
+    \{\
+        string error("Failed to find a helper to bridge given protocol and bus.");\
+        throw ProtocolBusMismatchException(error);\
+    \}\
+    \
+    result = xchange.queryDevice(helper);\
+    if(NULL == result) \
+    \{\
+        string error("Expected queryDevice to produce a non-null result "\
+            "containing a spectrum protocol scans to average.  Without this data, it is not possible to "\
+            "continue.");\
+        throw ProtocolException(error);\
+    \}\
+	\
+	// queryDevice returns a byte stream, turn that into a float... mind our endians.\
+	bptr = (byte *)&scansToAverage;\
+	for(unsigned int j = 0; j < sizeof(unsigned short int); j++) \
+		bptr[j] = (*result)[j];\
+\
+		\
+	return scansToAverage;\
+\}\
+\
+void OBPSpectrumProcessingProtocol::writeSpectrumProcessingScansToAverage(\
+            const Bus &bus, unsigned short int scansToAverage) throw (ProtocolException) \
+\{\
+\
+    OBPSetScansToAverageExchange xchange;\
+\
+    TransferHelper *helper = bus.getHelper(xchange.getHints());\
+    if(NULL == helper) \
+    \{\
+        string error("Failed to find a helper to bridge given protocol and bus.");\
+        throw ProtocolBusMismatchException(error);\
+    \}\
+\
+    xchange.setScansToAverage(scansToAverage);\
+\
+    /* This may cause a ProtocolException to be thrown. */\
+    bool retval = xchange.sendCommandToDevice(helper);\
+\
+    if(false == retval) \
+    \{\
+        string error("Device rejected the setpoint.  Was it out of bounds?");\
+        throw ProtocolException(error);\
+    \}\
+\}\
+\
+unsigned char OBPSpectrumProcessingProtocol::readSpectrumProcessingBoxcarWidth(const Bus &bus) throw (ProtocolException) \
+\{\
+    vector<byte> *result = NULL;\
+    unsigned char boxcarWidth;\
+    \
+    OBPGetBoxcarWidthExchange xchange;\
+	\
+    TransferHelper *helper = bus.getHelper(xchange.getHints());\
+    if(NULL == helper) \
+    \{\
+        string error("Failed to find a helper to bridge given protocol and bus.");\
+        throw ProtocolBusMismatchException(error);\
+    \}\
+    \
+    result = xchange.queryDevice(helper);\
+    if(NULL == result) \
+    \{\
+        string error("Expected queryDevice to produce a non-null result "\
+            "containing a spectrum protocol boxcar filter width.  Without this data, it is not possible to "\
+            "continue.");\
+        throw ProtocolException(error);\
+    \}\
+		\
+	boxcarWidth=(*result)[0]; \
+	delete result;\
+	\
+	return boxcarWidth;\
+\}\
+\
+\
+void OBPSpectrumProcessingProtocol::writeSpectrumProcessingBoxcarWidth(\
+            const Bus &bus, unsigned char boxcarWidth) throw (ProtocolException) \
+\{\
+\
+    OBPSetBoxcarWidthExchange xchange;\
+\
+    TransferHelper *helper = bus.getHelper(xchange.getHints());\
+    if(NULL == helper) \
+    \{\
+        string error("Failed to find a helper to bridge given protocol and bus.");\
+        throw ProtocolBusMismatchException(error);\
+    \}\
+\
+    xchange.setBoxcarWidth(boxcarWidth);\
+\
+    /* This may cause a ProtocolException to be thrown. */\
+    bool retval = xchange.sendCommandToDevice(helper);\
+\
+    if(false == retval) \
+    \{\
+        string error("Device rejected the setpoint.  Was it out of bounds?");\
+        throw ProtocolException(error);\
+    \}\
+\}\
+\
+
+\b 18.  Create a header file for the declarations needed in the protocol file in the last step.\
+
+\b0 \
+/***************************************************//**\
+ * @file    SpectrumProcessingProtocolInterface.h\
+ * @date    February 2015\
+ * @author  Kirk Clendinning, Heliospectra\
+ *\
+ * This is a simple interface for any protocol to implement\
+ * that provides a protocol-agnostic mechanism for accessing\
+ * spectrum processing features on an Ocean Optics device.\
+ *\
+ * This does not extend Protocol or otherwise get involved\
+ * in that hierarchy because it might interfere with the\
+ * lookup process for getting a Protocol object to delegate\
+ * these methods to.  Worse, it could end up inheriting\
+ * twice from the same base class, which is just messy.\
+ *\
+ * LICENSE:\
+ *\
+ * SeaBreeze Copyright (C) 2015, Ocean Optics Inc\
+ *\
+ * Permission is hereby granted, free of charge, to any person obtaining\
+ * a copy of this software and associated documentation files (the\
+ * "Software"), to deal in the Software without restriction, including\
+ * without limitation the rights to use, copy, modify, merge, publish,\
+ * distribute, sublicense, and/or sell copies of the Software, and to\
+ * permit persons to whom the Software is furnished to do so, subject\
+ * to the following conditions:\
+ *\
+ * The above copyright notice and this permission notice shall be included\
+ * in all copies or substantial portions of the Software.\
+ *\
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,\
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\
+ *******************************************************/\
+\cf3 \
+#ifndef SPECTRUMPROCESSINGPROTOCOLINTERFACE_H\
+#define SPECTRUMPROCESSINGPROTOCOLINTERFACE_H\cf0 \
+\
+#include "common/SeaBreeze.h"\
+#include "common/buses/Bus.h"\
+#include <vector>\
+#include "common/exceptions/ProtocolException.h"\
+#include "common/protocols/ProtocolHelper.h"\
+\
+namespace seabreeze \{\
+\
+    class SpectrumProcessingProtocolInterface : public ProtocolHelper \{\
+    public:\
+        SpectrumProcessingProtocolInterface(Protocol *protocol);\
+        virtual ~SpectrumProcessingProtocolInterface();\
+        virtual unsigned char readSpectrumProcessingBoxcarWidth(const Bus &bus)\
+                throw (ProtocolException) = 0;\
+        virtual unsigned short int readSpectrumProcessingScansToAverage(const Bus &bus)\
+                throw (ProtocolException) = 0;\
+        virtual void writeSpectrumProcessingBoxcarWidth(const Bus &bus, unsigned char boxcarWidth)\
+        		throw (ProtocolException) = 0;\
+        virtual void writeSpectrumProcessingScansToAverage(const Bus &bus, unsigned short int scansToAverage)\
+        		throw (ProtocolException) = 0;\
+    \};\
+\
+\}\
+\
+\cf3 #endif /* SPECTRUMPROCESSINGPROTOCOLINTERFACE_H */\
+\cf0 \
+
+\b 19. This completes the steps for implementing an OBP feature for the SeaBreeze API.\
+}

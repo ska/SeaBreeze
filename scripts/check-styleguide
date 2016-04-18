@@ -1,0 +1,232 @@
+#!/usr/bin/perl
+################################################################################
+#                              check-styleguide                                #
+################################################################################
+#                                                                              #
+#  Description:  Report and/or fix style-guide errors prior to commit/release. #
+#                Most importantly, ensures that every header and source file   #
+#                are marked with the current license boilerplate.              #
+#                                                                              #
+#  Author:       Mark Zieg <mark.zieg@oceanoptics.com>                         #
+#                                                                              #
+#  Invocation:   $ find include src test sample-code | egrep '\.(h|c|cpp)$' \  #
+#                  | xargs scripts/check-styleguide                            #
+#                                                                              #
+#  Todo:         Consider adding call to 'astyle' to enforce consistent code   #
+#                formatting at check-in.                                       #
+#                                                                              #
+################################################################################
+
+use strict;
+use warnings;
+
+use Getopt::Long;
+
+my %opts;
+
+my @LICENSE = split("\n", "
+SeaBreeze Copyright (C) 2014, Ocean Optics Inc
+
+Permission is hereby granted, free of charge, to any person obtaining 
+a copy of this software and associated documentation files (the 
+\"Software\"), to deal in the Software without restriction, including 
+without limitation the rights to use, copy, modify, merge, publish, 
+distribute, sublicense, and/or sell copies of the Software, and to 
+permit persons to whom the Software is furnished to do so, subject 
+to the following conditions:
+
+The above copyright notice and this permission notice shall be included 
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, 
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.");
+
+main();
+
+sub main
+{
+    GetOptions(
+        "dry-run!" => \$opts{dry_run},
+    );
+
+    foreach my $filename (@ARGV)
+    {
+        if (!$filename || ! -f $filename)
+        {
+            printf("skipping $filename...\n");
+            next;
+        }
+
+        #printf("updating $filename...\n");
+        my $lines = read_file($filename);
+        if ($lines)
+        {
+            fix($filename, $lines);
+            write_file($filename, $lines);
+        }
+    }
+}
+
+sub fix
+{
+    my $filename = shift;
+    my $lines = shift;
+
+    update_license($filename, $lines);
+    remove_fluff($filename, $lines);
+
+    if ($filename =~ /\.h$/)
+    {
+        validate_macro($filename, $lines);
+    }
+}
+
+my %macros;
+sub validate_macro
+{
+    my $filename = shift;
+    my $lines = shift;
+
+    # check that header file macros are unique across project
+    my $macro;
+    for (@$lines)
+    {
+        if (/#ifndef (\S+)/)
+        {
+            $macro = $1;
+
+            if ($macros{$macro})
+            {
+                printf("WARNING: $macro conflict ($filename, $macros{$macro})\n");
+            }
+            else
+            {
+                $macros{$macro} = $filename;
+            }
+
+            # only check first macro
+            last;
+        }
+    }
+
+    # validate that the macro name more-or-less looks like the filename
+    if ($macro)
+    {
+        my ($basename) = ($filename =~ /([^\/]+)$/);
+        $basename =~ s/[-_.]//g;
+        $basename = lc($basename);
+
+        $macro =~ s/_//g;
+        $macro = lc($macro);
+
+        my $basemacro = $macro;
+        $basemacro =~ s/seabreeze//;
+
+        if ($basemacro !~ /$basename/i && $macro !~ /$basename/) 
+        {
+            printf("WARNING: MACRO $macro BASENAME $basename FILE $filename\n");
+        }
+    }
+    else
+    {
+        # validate that header has macro
+        printf("WARNING: no macro found in $filename\n");
+    }
+}
+
+sub update_license
+{
+    my $filename = shift;
+    my $lines = shift;
+    
+    my $state = "LOOKING_FOR_LICENSE";
+    my $size = @$lines + 1;
+    my $prefix = "";
+    my $license_offset = -1;
+    my $license_length = -1;
+
+    # find current license
+    for (my $i = 0; $i < $size; $i++)
+    {
+        next unless $lines->[$i];
+        if ($state eq "LOOKING_FOR_LICENSE")
+        {
+            if ($lines->[$i] =~ /^(.*)LICENSE:\s*$/)
+            {
+                $prefix = $1;
+                $license_offset = $i + 1;
+                $state = "LOOKING_FOR_LICENSE_END";
+            }
+        }
+        elsif ($state eq "LOOKING_FOR_LICENSE_END")
+        {
+            if ($lines->[$i] =~ /\*\//)
+            {
+                $license_length = $i - $license_offset;
+                $state = "FOUND_LICENSE";
+                last;
+            }
+        }
+    }
+
+    if ($state ne "FOUND_LICENSE")
+    {
+        printf("Warning: no license found in $filename\n");
+        return;
+    }
+
+    my @prefixed_license;
+    for (@LICENSE)
+    {
+        chomp;
+        push @prefixed_license, $prefix . $_;
+    }
+    
+    splice @$lines, $license_offset, $license_length, @prefixed_license;
+}
+
+# remove or warn on anything that should not appear in any file
+sub remove_fluff
+{
+    my $filename = shift;
+    my $lines = shift;
+
+    # todo: expand tabs?
+
+    # remove trailing whitespace
+    for (@$lines)
+    {
+        s/\s*$//;
+    }
+}
+
+sub write_file
+{
+    my $filename = shift;
+    my $lines = shift;
+
+    $filename .= ".dryrun" if $opts{dry_run};
+
+    open(OUTFILE, ">$filename") || die "can't write $filename: $!\n";
+    print OUTFILE join("\n", @$lines);
+
+    # ensure trailing linefeed...absence breaks at least one compiler
+    print OUTFILE "\n" unless $lines->[-1] =~ /^\s*$/; 
+
+    close(OUTFILE);
+}
+
+sub read_file
+{
+    my $filename = shift;
+
+    open(INFILE, $filename) || die "Can't read $filename: $!\n";
+    my @lines = <INFILE>;
+    close(INFILE);
+    return \@lines;
+}

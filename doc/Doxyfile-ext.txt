@@ -1,0 +1,6 @@
+Title           = SeaBreezeWrapper Documentation
+Company         = Ocean Optics, Inc.
+Author          = Ocean Optics, Inc
+DocumentType    = SeaBreezeWrapper Reference Manual
+Subject         = SeaBreezeWrapper
+Keywords        = SeaBreezeWrapper
